@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/home/food_page_body.dart';
 
 import '../utils/colors.dart';
 import '../widgets/big_text.dart';
@@ -19,8 +20,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
           body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            margin: const EdgeInsets.only(top: 15, bottom: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -63,6 +63,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   )
                 ]),
           ),
+          FoodPageBody(),
         ],
       )),
     );
