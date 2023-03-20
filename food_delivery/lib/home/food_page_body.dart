@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/widgets/icon_text_widget.dart';
@@ -19,6 +20,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   );
   var _currentPageValue = 0.0;
   final double _scaleFactor = 0.8;
+  final double _height = 220;
 
   @override
   void initState() {
@@ -38,14 +40,52 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 320,
-      child: PageView.builder(
-          controller: _controller,
-          itemCount: 5,
-          itemBuilder: (context, position) {
-            return _buildPageItem(position);
-          }),
+    var pageLength = 5;
+    return Column(
+      children: [
+        Container(
+          height: 320,
+          child: PageView.builder(
+              controller: _controller,
+              itemCount: 5,
+              itemBuilder: (context, position) {
+                Matrix4 matrix = Matrix4.identity();
+                if (position == _currentPageValue.floor()) {
+                  var currScale =
+                      1 - (_currentPageValue - position) * (1 - _scaleFactor);
+                  var currTrans = _height * (1 - currScale) / 2;
+                  matrix = Matrix4.diagonal3Values(1, currScale, 1)
+                    ..setTranslationRaw(0, currTrans, 0);
+                } else if (position == _currentPageValue.floor() - 1) {
+                  var currScale =
+                      1 - (_currentPageValue - position) * (1 - _scaleFactor);
+                  var currTrans = _height * (1 - currScale) / 2;
+                  matrix = Matrix4.diagonal3Values(1, currScale, 1);
+                  matrix = Matrix4.diagonal3Values(1, currScale, 1)
+                    ..setTranslationRaw(1, currTrans, 0);
+                } else {
+                  matrix = Matrix4.diagonal3Values(1, _scaleFactor, 1)
+                    ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 1);
+                }
+
+                return Transform(
+                  transform: matrix,
+                  child: _buildPageItem(position),
+                );
+              }),
+        ),
+        DotsIndicator(
+          dotsCount: pageLength,
+          position: _currentPageValue,
+          decorator: DotsDecorator(
+            activeColor: AppColors.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+          ),
+        )
+      ],
     );
   }
 }
@@ -72,7 +112,22 @@ Widget _buildPageItem(int index) {
           margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 5,
+                offset: Offset(0, 5),
+              ),
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(-5, 0),
+              ),
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(5, 0),
+              ),
+            ],
           ),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

@@ -19,8 +19,9 @@ class _MainFoodPageState extends State<MainFoodPage> {
       child: Scaffold(
           body: Column(
         children: [
+          //showing the header
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -63,6 +64,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   )
                 ]),
           ),
+          //showing the body
           FoodPageBody(),
         ],
       )),
