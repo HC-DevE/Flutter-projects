@@ -43,7 +43,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     var pageLength = 5;
     return Column(
       children: [
-        Container(
+        //slider section
+        SizedBox(
           height: 320,
           child: PageView.builder(
               controller: _controller,
@@ -65,7 +66,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     ..setTranslationRaw(1, currTrans, 0);
                 } else {
                   matrix = Matrix4.diagonal3Values(1, _scaleFactor, 1)
-                    ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 1);
+                    ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 0);
                 }
 
                 return Transform(
@@ -74,7 +75,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 );
               }),
         ),
+        //Dots indicator
         DotsIndicator(
+        
+
+        
           dotsCount: pageLength,
           position: _currentPageValue,
           decorator: DotsDecorator(
@@ -85,6 +90,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 borderRadius: BorderRadius.circular(5.0)),
           ),
         )
+        //Popular text
+        // SizedBox(height: Dimensions.height30,)
       ],
     );
   }
