@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/utils/colors.dart';
+import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/icon_text_widget.dart';
 
 import '../widgets/big_text.dart';
@@ -20,7 +23,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   );
   var _currentPageValue = 0.0;
   final double _scaleFactor = 0.8;
-  final double _height = 220;
+  final double _height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -43,9 +46,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     var pageLength = 5;
     return Column(
       children: [
-        //slider section
-        SizedBox(
-          height: 320,
+        Container(
+          height: Dimensions.pageView,
           child: PageView.builder(
               controller: _controller,
               itemCount: 5,
@@ -101,7 +103,7 @@ Widget _buildPageItem(int index) {
   return Stack(
     children: [
       Container(
-        height: 220,
+        height: Dimensions.pageViewContainer,
         margin: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: index.isEven ? Colors.black12 : AppColors.mainColor,
@@ -115,11 +117,11 @@ Widget _buildPageItem(int index) {
       Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: 130,
+          height: Dimensions.pageViewTextContainer,
           margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(Dimensions.radius20),
             boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
@@ -137,13 +139,14 @@ Widget _buildPageItem(int index) {
             ],
           ),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.height15, vertical: Dimensions.height15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BigText(
                     text: 'Pancake With Honey',
-                    size: 20,
+                    size: Dimensions.font20,
                     color: AppColors.mainBlackColor,
                     fontWeight: FontWeight.w500),
                 const SizedBox(height: 10),
