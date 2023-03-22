@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/home/food_page_body.dart';
-
 import '../utils/colors.dart';
+import '../utils/dimensions.dart';
 import '../widgets/big_text.dart';
 import '../widgets/small_text.dart';
 
@@ -21,7 +21,8 @@ class _MainFoodPageState extends State<MainFoodPage> {
         children: [
           //showing the header
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.height20, vertical: Dimensions.height20),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
