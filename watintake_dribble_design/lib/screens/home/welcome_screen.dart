@@ -59,7 +59,6 @@ class _WelcomePageState extends State<WelcomePage> {
                 decoration: BoxDecoration(
                   color: Color(0xffF2F2F2),
                   borderRadius: BorderRadius.circular(50),
-                  image: ,
                   // image: Image.asset('lib/assets/images/welcome-screen-image.png'),
                 ),
                 child: Column(
