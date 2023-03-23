@@ -95,7 +95,7 @@ Widget _buildPageItem(int index) {
     children: [
       Container(
         height: 220,
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10,vertical:10),
         decoration: BoxDecoration(
           color: index.isEven ? Colors.black12 : AppColors.mainColor,
           borderRadius: BorderRadius.circular(30),
