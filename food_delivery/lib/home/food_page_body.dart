@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/utils/colors.dart';
@@ -79,9 +77,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
         //Dots indicator
         DotsIndicator(
-        
-
-        
           dotsCount: pageLength,
           position: _currentPageValue,
           decorator: DotsDecorator(
@@ -91,9 +86,81 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
           ),
-        )
+        ),
         //Popular text
-        // SizedBox(height: Dimensions.height30,)
+        SizedBox(
+          height: Dimensions.height30,
+        ),
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.width20),
+          child: Row(
+            children: [
+              BigText(
+                text: 'Popular',
+              ),
+              SizedBox(width: Dimensions.width10),
+              Container(
+                margin: EdgeInsets.only(bottom: Dimensions.height10),
+                child: BigText(text: ".", color: Colors.black26),
+              ),
+              SizedBox(width: Dimensions.width10),
+              SmallText(
+                text: 'Food pairing',
+                color: Colors.black38,
+              ),
+            ],
+          ),
+        ),
+        Container(
+          height: 900,
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            // shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: ((context, index) {
+              return Container(
+                margin: EdgeInsets.only(
+                    left: Dimensions.width20, right: Dimensions.width20, top: Dimensions.height10),
+                child: Row(
+                  children: [
+                    //image section
+                    Container(
+                      height: 100,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20),
+                        color: Colors.white38,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('lib/assets/images/fruits.jpg'),
+                        ),
+                      ),
+                    ),
+                    //Text container
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        // width: 200,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.only(
+                                topRight: Radius.circular(Dimensions.radius20),
+                                bottomRight: Radius.circular(Dimensions.radius20),
+                              ),
+                          color: Colors.white,
+                        ),
+                        child: BigText(text: 'Nutrutious fruit meal')
+                      ),
+                    )
+
+                    
+                  ],
+                ),
+              );
+            }),
+          ),
+        ),
       ],
     );
   }
@@ -104,7 +171,7 @@ Widget _buildPageItem(int index) {
     children: [
       Container(
         height: Dimensions.pageViewContainer,
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.symmetric(horizontal: Dimensions.width10),
         decoration: BoxDecoration(
           color: index.isEven ? Colors.black12 : AppColors.mainColor,
           borderRadius: BorderRadius.circular(30),
