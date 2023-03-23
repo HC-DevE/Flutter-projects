@@ -120,7 +120,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             itemBuilder: ((context, index) {
               return Container(
                 margin: EdgeInsets.only(
-                    left: Dimensions.width20, right: Dimensions.width20, top: Dimensions.height10),
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                    top: Dimensions.height10),
                 child: Row(
                   children: [
                     //image section
@@ -131,7 +133,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius20),
                         color: Colors.white38,
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage('lib/assets/images/fruits.jpg'),
                         ),
@@ -143,18 +145,22 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         height: 100,
                         // width: 200,
                         decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.only(
-                                topRight: Radius.circular(Dimensions.radius20),
-                                bottomRight: Radius.circular(Dimensions.radius20),
-                              ),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(Dimensions.radius20),
+                            bottomRight: Radius.circular(Dimensions.radius20),
+                          ),
                           color: Colors.white,
                         ),
-                        child: BigText(text: 'Nutrutious fruit meal')
+                        child: Padding(
+                          padding: EdgeInsets.only(left: Dimensions.width10),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                BigText(text: 'Nutrious fruit meal'),
+                              ]),
+                        ),
                       ),
                     )
-
-                    
                   ],
                 ),
               );
