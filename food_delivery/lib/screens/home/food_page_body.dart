@@ -2,10 +2,11 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
+import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/icon_text_widget.dart';
 
-import '../widgets/big_text.dart';
-import '../widgets/small_text.dart';
+import '../../widgets/big_text.dart';
+import '../../widgets/small_text.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({super.key});
@@ -111,61 +112,80 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
-        Container(
-          height: 900,
-          child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            // shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: ((context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: Dimensions.width20,
-                    right: Dimensions.width20,
-                    top: Dimensions.height10),
-                child: Row(
-                  children: [
-                    //image section
-                    Container(
-                      height: 100,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        color: Colors.white38,
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('lib/assets/images/fruits.jpg'),
-                        ),
+        ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: ((context, index) {
+            return Container(
+              margin: EdgeInsets.only(
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  top: Dimensions.height10),
+              child: Row(
+                children: [
+                  //image section
+                  Container(
+                    height: Dimensions.listViewImgHeight120,
+                    width: Dimensions.listViewImgWidth120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
+                      color: Colors.white38,
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('lib/assets/images/fruits.jpg'),
                       ),
                     ),
-                    //Text container
-                    Expanded(
-                      child: Container(
-                        height: 100,
-                        // width: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(Dimensions.radius20),
-                            bottomRight: Radius.circular(Dimensions.radius20),
-                          ),
-                          color: Colors.white,
+                  ),
+                  //Text container
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.width20,
+                          vertical: Dimensions.height10),
+                      height: Dimensions.listViewTextContainer100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(Dimensions.radius20),
+                          bottomRight: Radius.circular(Dimensions.radius20),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: Dimensions.width10),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                BigText(text: 'Nutrious fruit meal'),
-                              ]),
-                        ),
+                        color: Colors.white,
                       ),
-                    )
-                  ],
-                ),
-              );
-            }),
-          ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.width10),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              BigText(text: 'Nutrious fruit meal in ellipsis'),
+                              SmallText(text: 'With chinese charasteristics'),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  IconAndTextWidget(
+                                      text: 'Normal',
+                                      icon: Icons.circle_sharp,
+                                      iconColor: AppColors.iconColor1),
+                                  IconAndTextWidget(
+                                      text: '1.7km',
+                                      icon: Icons.location_pin,
+                                      iconColor: AppColors.mainColor),
+                                  IconAndTextWidget(
+                                      text: '32min',
+                                      icon: Icons.watch_later_outlined,
+                                      iconColor: AppColors.iconcolor2),
+                                ],
+                              ),
+                            ]),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          }),
         ),
       ],
     );
@@ -214,61 +234,7 @@ Widget _buildPageItem(int index) {
           child: Container(
             padding: EdgeInsets.symmetric(
                 horizontal: Dimensions.height15, vertical: Dimensions.height15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BigText(
-                    text: 'Pancake With Honey',
-                    size: Dimensions.font20,
-                    color: AppColors.mainBlackColor,
-                    fontWeight: FontWeight.w500),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Wrap(
-                        children: List.generate(
-                            5,
-                            (index) => const Icon(Icons.star,
-                                color: AppColors.mainColor, size: 15))),
-                    const SizedBox(width: 10),
-                    SmallText(
-                      text: '4.5',
-                      color: AppColors.mainBlackColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const SizedBox(width: 10),
-                    SmallText(
-                      text: '1257',
-                      color: Colors.black54,
-                    ),
-                    const SizedBox(width: 10),
-                    SmallText(
-                      text: 'comments',
-                      color: Colors.black54,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    IconAndTextWidget(
-                        text: 'Normal',
-                        icon: Icons.circle_sharp,
-                        iconColor: AppColors.iconColor1),
-                    IconAndTextWidget(
-                        text: '1.7km',
-                        icon: Icons.location_pin,
-                        iconColor: AppColors.mainColor),
-                    IconAndTextWidget(
-                        text: '32min',
-                        icon: Icons.watch_later_outlined,
-                        iconColor: AppColors.iconcolor2),
-                  ],
-                ),
-              ],
-            ),
+            child: AppColumn(text: 'Pancake With Honey'),
           ),
         ),
       ),
