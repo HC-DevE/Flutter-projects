@@ -26,6 +26,7 @@ class Dimensions {
   static double width50 = screenWidth / (screenWidth / 50);
 
   //dynamic font size
+  static double font16 = screenHeight / (screenHeight / 16);
   static double font20 = screenHeight / (screenHeight / 20);
   static double font26 = screenHeight / (screenHeight / 26);
   //dynamic radius size

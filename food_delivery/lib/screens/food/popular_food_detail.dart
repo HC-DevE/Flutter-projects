@@ -6,6 +6,7 @@ import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/big_text.dart';
+import 'package:food_delivery/widgets/expandable_text_widget.dart';
 import 'package:food_delivery/widgets/small_text.dart';
 
 import '../../nutritionix_api.service.dart';
@@ -20,6 +21,7 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          //background image
           Positioned(
             left: 0,
             right: 0,
@@ -35,6 +37,7 @@ class PopularFoodDetail extends StatelessWidget {
               ),
             ),
           ),
+          // icon widget
           Positioned(
             top: Dimensions.height40,
             left: Dimensions.width20,
@@ -52,6 +55,7 @@ class PopularFoodDetail extends StatelessWidget {
               ],
             ),
           ),
+          //introduction of food
           Positioned(
             left: 0,
             right: 0,
@@ -72,6 +76,7 @@ class PopularFoodDetail extends StatelessWidget {
                 height:
                     Dimensions.screenHeight - Dimensions.popularFoodImgSize350,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppColumn(
                       text: 'Pancake With Honey',
@@ -79,34 +84,23 @@ class PopularFoodDetail extends StatelessWidget {
                     SizedBox(
                       height: Dimensions.height20,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BigText(text: 'Introduce'),
-                        SizedBox(
-                          height: Dimensions.height10,
-                        ),
-                        RichText(
-                          text: TextSpan(
+                    BigText(text: 'Introduce'),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    // expandable text widget
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: ExpandableTextWidget(
                             text:
-                                'Chiken marinated in a spiced yoghurt is placed in a large pot, then layered with fired onions(cheeky easy sub below!), fresh coriander/cilantro, then pare blabla bla blablabla bla bla blalalblblalbl',
-                          ),
-                        ),
-                        Container(
-                          child: TextButton(
-                            onPressed: () async =>
-                                {await fetchNutritionData('apple')},
-                            child: Icon(Icons.search_off_outlined),
-                          ),
-                        )
-                      ],
+                                'Chiken marinated in a spiced yoghurt is placed in a large pot, then layered with fired onions(cheeky easy sub below!), fresh coriander/cilantro, then pare blabla bla blablabla bla bla blalalblblalbl'),
+                      ),
                     )
                   ],
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
       bottomNavigationBar: Container(
