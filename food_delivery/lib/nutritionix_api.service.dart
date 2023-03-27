@@ -11,6 +11,7 @@ Future<http.Response> fetchNutritionData(String query) async {
     headers: {
       'x-app-id': '29e1a47d',
       'x-app-key': '8cd406e41e5fccc4a7a4ab9b94965a32',
+      'x-remote-user-id': '0',
     },
   );
 
