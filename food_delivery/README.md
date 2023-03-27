@@ -23,7 +23,7 @@ samples, guidance on mobile development, and a full API reference.
 baseURL: trackapi.nutritionix.com/ 
 endpoints: view api dpcs url
 HEADERS: 
-    -x-app-id:
-    -x-app-key:
+    -x-app-id: 29e1a47d
+    -x-app-key: 8cd406e41e5fccc4a7a4ab9b94965a32
     x-remote-user-id: 0 for developer mode
 //

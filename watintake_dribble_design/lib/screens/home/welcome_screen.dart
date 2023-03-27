@@ -29,37 +29,65 @@ class _WelcomePageState extends State<WelcomePage> {
               children: [
                 ClipRect(
                   child: Container(
-                    height: MediaQuery.of(context).size.width * 0.8,
-                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.width * 0.2,
+                      left: MediaQuery.of(context).size.width * 0.15,
+                    ),
+                    height: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.7,
                     decoration: BoxDecoration(
                       color: Color(0xff70BDF2),
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(120, 75)),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(50),
+                      ),
                     ),
                   ),
                 )
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 18.0),
+          Align(
+            alignment: Alignment.center,
             child: Container(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.transparent),
-                  shadowColor: MaterialStateProperty.all(Colors.transparent),
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.width * 0.1,
+              ),
+              child: Container(
+                height: MediaQuery.of(context).size.width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.5,
+                decoration: BoxDecoration(
+                  color: Color(0xffF2F2F2),
+                  borderRadius: BorderRadius.circular(50),
+                  image: ,
+                  // image: Image.asset('lib/assets/images/welcome-screen-image.png'),
                 ),
-                onPressed: () {},
-                child: Container(
-                  height: 50,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Color(0xff70BDF2),
-                  ),
-                  child: Center(child: Text('Get Started')),
+                child: Column(
+                  
                 ),
+              ),
+              ),
+            ),
+          Container(
+            height: 150,
+            width: 350,
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.width * 0.5,
+            ),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                shadowColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {},
+              child: Container(
+                height: 50,
+                width: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Color(0xff70BDF2),
+                ),
+                child: Center(child: Text('Get Started')),
               ),
             ),
           ),
