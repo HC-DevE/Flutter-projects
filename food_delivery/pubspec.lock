@@ -115,6 +115,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+=======
+>>>>>>> 54a0c1a (e-test)
   js:
     dependency: transitive
     description:

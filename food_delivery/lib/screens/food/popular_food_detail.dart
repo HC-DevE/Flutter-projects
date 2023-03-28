@@ -31,7 +31,7 @@ class PopularFoodDetail extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('lib/assets/images/meet_salad.jpg'),
+                  image: AssetImage('lib/assets/images/pancakes.jpg'),
                   // image: AssetImage('lib/assets/images/fruits.jpg'),
                 ),
               ),
