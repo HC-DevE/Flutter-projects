@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
+import 'package:watintake_dribble_design/screens/home/login_screen.dart';
 import 'package:watintake_dribble_design/screens/home/welcome_screen.dart';
 
 void main() {
@@ -12,11 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-      ),
+      theme: ThemeData(),
       home: WelcomePage(),
+      // home: LoginScreen(),
     );
   }
 }
-

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
+import 'package:watintake_dribble_design/screens/home/login_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -11,59 +11,77 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 50),
-            height: MediaQuery.of(context).size.width * 0.7,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Color(0xffF2F2F2),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          height: size.height * 0.9,
+          child: Column(
+            children: [
+              Image.asset(
+                'lib/assets/images/welcome_screen.png',
               ),
-            ),
-            child: Image.asset(
-              'lib/assets/images/welcome-screen-image.png',
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-            ),
-          ),
-          Container(
-            height: 150,
-            width: 350,
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.width * 0.5,
-            ),
-            child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                shadowColor: MaterialStateProperty.all(Colors.transparent),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => HomePageScreen(),
-                  ),
-                );
-              },
-              child: Container(
-                height: 50,
-                width: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
+              Text(
+                "Your body needs water !",
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
                   color: Color(0xff70BDF2),
                 ),
-                child: Center(child: Text('Get Started')),
               ),
-            ),
+              SizedBox(height: 5),
+              SizedBox(
+                width: 280,
+                child: Text(
+                  "Track your daily water intake with just a few taps !",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black38,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                alignment: Alignment.bottomCenter,
+                height: 45,
+                width: 300,
+                decoration: BoxDecoration(
+                  color: Color(0xff70BDF2),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push<void>(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => const LoginScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Get Started",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Icon(Icons.arrow_forward, color: Colors.white),
+                  ],
+                ),
+              )
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
