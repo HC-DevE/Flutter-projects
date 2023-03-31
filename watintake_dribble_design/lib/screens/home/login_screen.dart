@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -68,7 +67,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push<void>(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              const HomePageScreen(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       "Login",
                       style: TextStyle(
@@ -108,8 +115,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ],
           //add google authentification button
-          
-
         ),
       ),
     );
