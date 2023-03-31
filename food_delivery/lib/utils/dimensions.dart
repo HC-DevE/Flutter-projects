@@ -26,8 +26,25 @@ class Dimensions {
   static double width50 = screenWidth / (screenWidth / 50);
 
   //dynamic font size
+  static double font16 = screenHeight / (screenHeight / 16);
   static double font20 = screenHeight / (screenHeight / 20);
+  static double font26 = screenHeight / (screenHeight / 26);
   //dynamic radius size
   static double radius20 = screenHeight / (screenHeight / 20);
   static double radius30 = screenHeight / (screenHeight / 30);
+
+  //icon size
+  static double iconSize24 = (screenHeight * 24) / screenHeight;
+  static double iconSize16 = (screenHeight * 16) / screenHeight;
+
+  //listView size
+  static double listViewImgHeight120 = screenHeight / (screenHeight / 120);
+  static double listViewImgWidth120 = screenWidth / (screenWidth / 120);
+  static double listViewTextContainer100 = screenHeight / (screenHeight / 100);
+
+  //popular food
+  static double popularFoodImgSize350 = screenHeight / (screenHeight / 350);
+
+  //bottom height
+  static double bottomHeightBar120 = screenHeight / (screenHeight / 120);
 }

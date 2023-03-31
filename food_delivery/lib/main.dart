@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/home/main_food_page.dart';
+import 'package:food_delivery/screens/food/popular_food_detail.dart';
+import 'package:food_delivery/screens/home/main_food_page.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // debugShowMaterialGrid: true,
-      home: MainFoodPage(),
+      // home: MainFoodPage(),
+      home: PopularFoodDetail(),
     );
   }
 }
