@@ -13,61 +13,112 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_const_constructors
     return Scaffold(
-      body: Column(
-        // ignore: sort_child_properties_last
-        children:const <Widget>[
-          Spacer(),
-          ElevatedCard(
-            child: Placeholder(),
+      body: const HomePageWidget(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Workout',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Hydratation',
           ),
         ],
-      
-        bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              label: 'Hydration',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              label: 'Workout',
-            ),
-          ],
-          selectedItemColor: Colors.amber[800],
-          onTap: (_) {
+        currentIndex: 0,
+        selectedItemColor: Colors.amber[800],
+        onTap: (int index) {
+          if (index == 0) {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const HomePageScreen(),
+              ),
+            );
+          } else if (index == 1) {
             Navigator.push<void>(
               context,
               MaterialPageRoute<void>(
                 builder: (BuildContext context) => const WelcomePage(),
               ),
             );
-          },
-        );
-      ),
+          } else if (index == 2) {
+            Navigator.push<void>(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => const Placeholder(),
+              ),
+            );
+          }
+        },
+      )
+    
     );
-
   }
 }
 
-class ElevatedCard extends StatelessWidget {
-  const ElevatedCard({super.key, required Placeholder child});
-  
+class HomePageWidget extends StatelessWidget {
+  const HomePageWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Card(
-        child: SizedBox(
-          width: 300,
-          height: 100,
-          child: Center(child: Text('Elevated Card')),
-        )
-      ),
+    return Center(
+      child: Column(children: [
+        Card(
+          // clipBehavior is necessary because, without it, the InkWell's animation
+          // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
+          // This comes with a small performance cost, and you should not set [clipBehavior]
+          // unless you need it.
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const HomePageScreen(),
+                ),
+              );
+            },
+            child: const SizedBox(
+              width: 300,
+              height: 100,
+              child: Text('Workout Page'),
+            ),
+          ),
+        ),
+        Card(
+          // clipBehavior is necessary because, without it, the InkWell's animation
+          // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
+          // This comes with a small performance cost, and you should not set [clipBehavior]
+          // unless you need it.
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const HomePageScreen(),
+                ),
+              );
+            },
+            child: const SizedBox(
+              width: 300,
+              height: 100,
+              child: Text('hydratation Page'),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }
+
 

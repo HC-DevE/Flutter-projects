@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watintake_dribble_design/screens/home/login_screen.dart';
+import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -61,7 +61,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         Navigator.push<void>(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const LoginScreen(),
+                            builder: (BuildContext context) => const HomePageScreen(),
                           ),
                         );
                       },
