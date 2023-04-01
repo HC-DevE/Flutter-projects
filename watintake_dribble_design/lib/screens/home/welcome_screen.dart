@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:watintake_dribble_design/screens/home/login_screen.dart';
+
+import 'auth_page.dart';
+import 'homepage_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -60,8 +65,8 @@ class _WelcomePageState extends State<WelcomePage> {
                       onPressed: () {
                         Navigator.push<void>(
                           context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const LoginScreen(),
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => AuthPage(),
                           ),
                         );
                       },
