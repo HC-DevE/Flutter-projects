@@ -4,12 +4,12 @@ import 'package:watintake_dribble_design/components/my_button.dart';
 import 'package:watintake_dribble_design/components/my_text_field.dart';
 import 'package:watintake_dribble_design/components/square_box_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:watintake_dribble_design/screens/home/register_screen.dart';
+import 'package:watintake_dribble_design/screens/home/reset_password_screen.dart';
 import 'package:watintake_dribble_design/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function()? onTap;
-  LoginScreen({super.key, this.onTap});
+  const LoginScreen({super.key, this.onTap});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -112,9 +112,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        'Forgot Password ?',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                      GestureDetector(
+                        onTap: () {
+                          //forgot password
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ResetPasswordScreen();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Forgot Password ?',
+                          style:
+                              TextStyle(color: Colors.grey[600], fontSize: 14),
+                        ),
                       ),
                     ],
                   ),
@@ -164,11 +178,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SquareButton(
-                      imagePath: 'lib/assets/images/google_icon_96.png', onTap: AuthService().signInWithGoogle,
+                      imagePath: 'lib/assets/images/google_icon_96.png',
+                      onTap: AuthService().signInWithGoogle,
                     ),
                     const SizedBox(width: 10),
                     SquareButton(
-                      imagePath: 'lib/assets/images/welcome_screen.png', onTap: () {  },
+                      imagePath: 'lib/assets/images/welcome_screen.png',
+                      onTap: () {},
                     ),
                   ],
                 ),

@@ -19,11 +19,13 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         obscureText: isPassword,
         decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade400),
+            borderRadius: BorderRadius.circular(12),
           ),
           fillColor: Colors.grey.shade200,
           filled: true,
