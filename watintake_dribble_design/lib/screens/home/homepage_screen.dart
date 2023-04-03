@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:watintake_dribble_design/models/instant_search_api_data.dart';
-import 'package:watintake_dribble_design/screens/home/welcome_screen.dart';
-import 'package:watintake_dribble_design/services/auth_service.dart';
 import 'package:watintake_dribble_design/services/nutritionix_api_service.dart';
 
 class HomePageScreen extends StatefulWidget {
