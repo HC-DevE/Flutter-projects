@@ -26,7 +26,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   late List<Common>? _queryModel = [];
 
   _getData() async {
-    print('QueryModel: $_queryModel');
+    // print('QueryModel: $_queryModel');
     return _queryModel = await NutritionixService.fetchFood('apple');
   }
 

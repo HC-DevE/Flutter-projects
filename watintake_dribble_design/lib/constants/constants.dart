@@ -8,4 +8,6 @@ class NutritionixApiUrls {
 
 class NutritionixApiUrlEndpoints {
   static String instantSearch = "search/instant?query=";
+  static String signUp = "auth/signup";
+  static String signIn = "auth/signin";
 }
