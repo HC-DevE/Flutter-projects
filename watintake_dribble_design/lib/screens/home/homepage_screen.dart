@@ -23,11 +23,33 @@ void signUserOut() {
 
 class _HomePageScreenState extends State<HomePageScreen> {
   final user = FirebaseAuth.instance.currentUser!;
-  late List<Common>? _queryModel = [];
+  // late FoodModel? _foodModel = FoodModel();
+  late List<Common>? _commonFood = [];
+  late List<Branded>? _brandedFood = [];
 
-  _getData() async {
-    // print('QueryModel: $_queryModel');
-    return _queryModel = await NutritionixService.fetchFood('apple');
+  @override
+  void initState() {
+    super.initState();
+    // _getCommonFoodData();
+    // _getBrandedFoodData();
+    _getFoodData();
+  }
+
+  // Future<List<Common>> _getCommonFoodData() async {
+  //   return _commonFood = await NutritionixService.fetchCommonFood('apple');
+  // }
+
+  // Future<List<Branded>> _getBrandedFoodData() async {
+  //   return _brandedFood = await NutritionixService.fetchBrandedFood('apple');
+  // }
+
+  Future _getFoodData() async {
+    final commonFood = await NutritionixService.fetchCommonFood('apple');
+    final brandedFood = await NutritionixService.fetchBrandedFood('apple');
+    setState(() {
+      _commonFood = commonFood;
+      _brandedFood = brandedFood;
+    });
   }
 
   @override
@@ -52,15 +74,75 @@ class _HomePageScreenState extends State<HomePageScreen> {
               const SizedBox(height: 20),
               Expanded(
                 child: FutureBuilder(
-                  future: _getData(),
+                  future: _getFoodData(),
                   builder: (context, snapshot) {
                     return ListView.builder(
-                      itemCount: _queryModel!.length,
+                      itemCount: _commonFood!.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(_queryModel![index].foodName.toString()),
-                          subtitle:
-                              Text(_queryModel![index].servingQty!.toString()),
+                        return Column(
+                          children: [
+                            ListTile(
+                              title:
+                                  Text(_commonFood![index].foodName.toString()),
+                              leading: Image.network(
+                                _commonFood![index].photo!.thumb.toString(),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+              Text('Branded :'),
+              Expanded(
+                child: FutureBuilder(
+                  future: _getFoodData(),
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                      itemCount: _brandedFood!.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 15, bottom: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: ListTile(
+                                onTap: () {
+                                  print('${_brandedFood![index].foodName} tapped ');
+                                },
+                                title: Text(
+                                    _brandedFood![index].foodName.toString()
+                                ),
+                                subtitle: Row(
+                                  children: [
+                                    Text(
+                                        _brandedFood!.elementAt(index).servingQty!.toString()
+                                    ),
+                                    Text(
+                                        _brandedFood!.elementAt(index).servingUnit!.toString()
+                                    ),
+                                  ],
+                                ),
+                                leading: Image.network(
+                                  _brandedFood!.elementAt(index).photo!.thumb.toString()
+                              ),
+                              ),
+                            ),
+                            
+                          ],
                         );
                       },
                     );

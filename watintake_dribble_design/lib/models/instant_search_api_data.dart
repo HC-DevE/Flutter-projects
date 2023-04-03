@@ -72,8 +72,8 @@ class Branded {
   String? servingUnit;
   String? nixBrandId;
   String? brandNameItemName;
-  double? servingQty;
-  int? nfCalories;
+  num? servingQty;
+  num? nfCalories;
   Photo? photo;
   String? brandName;
   int? region;
@@ -126,6 +126,39 @@ class Branded {
     data['brand_type'] = brandType;
     data['nix_item_id'] = nixItemId;
     data['locale'] = locale;
+    return data;
+  }
+}
+
+class FoodModel {
+  List<Common>? common;
+  List<Branded>? branded;
+
+  FoodModel({this.common, this.branded});
+
+  FoodModel.fromJson(Map<String, dynamic> json) {
+    if (json['common'] != null) {
+      common = <Common>[];
+      json['common'].forEach((v) {
+        common!.add(Common.fromJson(v));
+      });
+    }
+    if (json['branded'] != null) {
+      branded = <Branded>[];
+      json['branded'].forEach((v) {
+        branded!.add(Branded.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (common != null) {
+      data['common'] = common!.map((v) => v.toJson()).toList();
+    }
+    if (branded != null) {
+      data['branded'] = branded!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

@@ -5,28 +5,87 @@ import 'package:watintake_dribble_design/models/instant_search_api_data.dart';
 import 'package:http/http.dart' as http;
 
 class NutritionixService {
-  //http request
-  static Future<List<Common>> fetchFood(String query) async {
-    final response = await http.get(
-      Uri.parse(NutritionixApiUrls.baseUrl +
-          NutritionixApiUrlEndpoints.instantSearch +
-          query),
-      headers: {
-        "x-app-id": "29e1a47d",
-        "x-app-key": "8cd406e41e5fccc4a7a4ab9b94965a32",
-        "x-remote-user-id": "0",
-      },
-    );
-    // print(response.body);
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      return (jsonDecode(response.body)['common'] as List)
-          .map((e) => Common.fromJson(e)).toList();
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load food');
+  // http request
+  static Future<List<Common>> fetchCommonFood(String query) async {
+    try {
+      final response = await http.get(
+        Uri.parse(NutritionixApiUrls.baseUrl +
+            NutritionixApiUrlEndpoints.instantSearch +
+            query),
+        headers: {
+          "x-app-id": "3e00de09",
+          "x-app-key": "15c7cc7bf90b4a4b665ecf96b4cf0347",
+          "x-remote-user-id": "0",
+        },
+      );
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+        var rest = data["common"] as List;
+        print(rest);
+
+        List<Common> foodList =
+            rest.map<Common>((json) => Common.fromJson(json)).toList();
+        return foodList;
+      } else {
+        throw Exception('Failed to load food');
+      }
+    } catch (e) {
+      print('Error occurred while fetching common food: $e');
+      throw Exception('Failed to load Food');
     }
   }
+
+  static Future<List<Branded>> fetchBrandedFood(String query) async {
+    try {
+      final response = await http.get(
+        Uri.parse(NutritionixApiUrls.baseUrl +
+            NutritionixApiUrlEndpoints.instantSearch +
+            query),
+        headers: {
+          "x-app-id": "3e00de09",
+          "x-app-key": "15c7cc7bf90b4a4b665ecf96b4cf0347",
+          "x-remote-user-id": "0",
+        },
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        var rest = data["branded"] as List;
+        print(rest);
+        List<Branded> foodList =
+            rest.map<Branded>((json) => Branded.fromJson(json)).toList();
+        return foodList;
+      } else {
+        throw Exception('Failed to load food');
+      }
+    } catch (e) {
+      print('Error occurred while fetching branded food: $e');
+      throw Exception('Failed to load Food');
+    }
+  }
+
+  // static Future<List<FoodModel>> fetchFood(String query) async {
+  //   final response = await http.get(
+  //     Uri.parse(NutritionixApiUrls.baseUrl +
+  //         NutritionixApiUrlEndpoints.instantSearch +
+  //         query),
+  //     headers: {
+  //       "x-app-id": "200cbecf",
+  //       "x-app-key": "3add4e49d007aaa7d9c9ee0ea922d947",
+  //       "x-remote-user-id": "0",
+  //     },
+  //   );
+  //   if (response.statusCode == 200) {
+  //     // If the server did return a 200 OK response,
+  //     // then parse the JSON.
+  //     final data = json.decode(response.body);
+  //     print(data);
+  //     List<FoodModel> foodList =
+  //         data.map<FoodModel>((json) => FoodModel.fromJson(json)).toList();
+  //     return foodList;
+  //   } else {
+  //     // If the server did not return a 200 OK response,
+  //     // then throw an exception.
+  //     throw Exception('Failed to load food');
+  //   }
+  // }
 }
