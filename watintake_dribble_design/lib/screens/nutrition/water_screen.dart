@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:watintake_dribble_design/widgets/daily_goal_form.dart';
+
 
 
 class HydratationPage extends StatefulWidget {
@@ -34,7 +36,7 @@ class _HydratationPageWidgetState extends State<HydratationPageWidget> {
         child: 
         OutlinedButton(
          onPressed: () => _dialogBuilder(context),
-         child: const Text('Open Dialog'),
+         child: const Text('Set your daily goal for water intake'),
           ),
           
       );
@@ -46,30 +48,14 @@ class _HydratationPageWidgetState extends State<HydratationPageWidget> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Basic dialog title'),
+          title: const Text('Set your daily goal for water intake'),
           content: const Text('A dialog is a type of modal window that\n'
               'appears in front of app content to\n'
               'provide critical information, or prompt\n'
               'for a decision to be made.'),
           actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Disable'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Enable'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+            DailyGoalForm()
+
           ],
         );
       },
