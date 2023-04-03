@@ -13,8 +13,8 @@ class NutritionixService {
             NutritionixApiUrlEndpoints.instantSearch +
             query),
         headers: {
-          "x-app-id": "3e00de09",
-          "x-app-key": "15c7cc7bf90b4a4b665ecf96b4cf0347",
+          "x-app-id": "974f7c64",
+          "x-app-key": "10afb9cf91dc5301ae8046bc81e9daf4",
           "x-remote-user-id": "0",
         },
       );
@@ -42,8 +42,8 @@ class NutritionixService {
             NutritionixApiUrlEndpoints.instantSearch +
             query),
         headers: {
-          "x-app-id": "3e00de09",
-          "x-app-key": "15c7cc7bf90b4a4b665ecf96b4cf0347",
+          "x-app-id": "974f7c64",
+          "x-app-key": "10afb9cf91dc5301ae8046bc81e9daf4",
           "x-remote-user-id": "0",
         },
       );

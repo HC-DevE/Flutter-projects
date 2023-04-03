@@ -43,13 +43,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
   //   return _brandedFood = await NutritionixService.fetchBrandedFood('apple');
   // }
 
-  Future _getFoodData() async {
-    final commonFood = await NutritionixService.fetchCommonFood('apple');
-    final brandedFood = await NutritionixService.fetchBrandedFood('apple');
-    setState(() {
-      _commonFood = commonFood;
-      _brandedFood = brandedFood;
-    });
+  Future<void> _getFoodData() async {
+    _commonFood = await NutritionixService.fetchCommonFood('apple');
+    _brandedFood = await NutritionixService.fetchBrandedFood('apple');
   }
 
   @override
@@ -81,11 +77,27 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            ListTile(
-                              title:
-                                  Text(_commonFood![index].foodName.toString()),
-                              leading: Image.network(
-                                _commonFood![index].photo!.thumb.toString(),
+                            Container(
+                              margin:
+                                  const EdgeInsets.only(left: 15, bottom: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: ListTile(
+                                title: Text(
+                                    _commonFood![index].foodName.toString()),
+                                leading: Image.network(
+                                  _commonFood![index].photo!.thumb.toString(),
+                                ),
                               ),
                             ),
                           ],
@@ -106,7 +118,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         return Column(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(left: 15, bottom: 8),
+                              margin:
+                                  const EdgeInsets.only(left: 15, bottom: 8),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
@@ -121,27 +134,30 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               ),
                               child: ListTile(
                                 onTap: () {
-                                  print('${_brandedFood![index].foodName} tapped ');
+                                  print(
+                                      '${_brandedFood![index].foodName} tapped ');
                                 },
                                 title: Text(
-                                    _brandedFood![index].foodName.toString()
-                                ),
+                                    _brandedFood![index].foodName.toString()),
                                 subtitle: Row(
                                   children: [
-                                    Text(
-                                        _brandedFood!.elementAt(index).servingQty!.toString()
-                                    ),
-                                    Text(
-                                        _brandedFood!.elementAt(index).servingUnit!.toString()
-                                    ),
+                                    Text(_brandedFood!
+                                        .elementAt(index)
+                                        .servingQty!
+                                        .toString()),
+                                    Text(_brandedFood!
+                                        .elementAt(index)
+                                        .servingUnit!
+                                        .toString()),
                                   ],
                                 ),
-                                leading: Image.network(
-                                  _brandedFood!.elementAt(index).photo!.thumb.toString()
-                              ),
+                                leading: Image.network(_brandedFood!
+                                    .elementAt(index)
+                                    .photo!
+                                    .thumb
+                                    .toString()),
                               ),
                             ),
-                            
                           ],
                         );
                       },
