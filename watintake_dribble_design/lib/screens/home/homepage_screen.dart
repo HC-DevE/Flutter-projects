@@ -23,172 +23,175 @@ void signUserOut() {
 
 class _HomePageScreenState extends State<HomePageScreen> {
   final user = FirebaseAuth.instance.currentUser!;
-  // late FoodModel? _foodModel = FoodModel();
   late List<Common>? _commonFood = [];
   late List<Branded>? _brandedFood = [];
 
   @override
   void initState() {
     super.initState();
-    // _getCommonFoodData();
-    // _getBrandedFoodData();
-    _getFoodData();
+    // _getFoodData();
   }
 
-  // Future<List<Common>> _getCommonFoodData() async {
-  //   return _commonFood = await NutritionixService.fetchCommonFood('apple');
-  // }
-
-  // Future<List<Branded>> _getBrandedFoodData() async {
-  //   return _brandedFood = await NutritionixService.fetchBrandedFood('apple');
-  // }
-
   Future<void> _getFoodData() async {
-    // _commonFood = await NutritionixService.fetchCommonFood('apple');
-    // _brandedFood = await NutritionixService.fetchBrandedFood('apple');
-    final value = await NutritionixService.fetchFood('apple').then((value) => {
-          _commonFood = value[0].common,
-          _brandedFood = value[0].branded,
-    });
+    final value = await NutritionixService.fetchFood('apple');
+    _commonFood = value.common;
+    _brandedFood = value.branded;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          actions: const [
-            IconButton(onPressed: signUserOut, icon: Icon(Icons.logout)),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        actions: const [
+          IconButton(onPressed: signUserOut, icon: Icon(Icons.logout)),
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Text(user.displayName!),
+                Text(user.email!),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: FutureBuilder(
+                future: _getFoodData(),
+                builder: (context, snapshot) {
+                  return Column(
+                    children: [
+                      const Text('Common Food:'),
+                      SizedBox(
+                        height: 300,
+                        child: ListView.builder(
+                          itemCount: _commonFood!.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 15, bottom: 8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: ListTile(
+                                    onTap: () {},
+                                    title: Text(
+                                        _commonFood![index].foodName.toString()),
+                                    leading: SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: Image.network(
+                                        _commonFood![index]
+                                            .photo!
+                                            .thumb
+                                            .toString(),
+                                        loadingBuilder:
+                                            (context, child, loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
+                                          return CircularProgressIndicator();
+                                        },
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: const Text('Branded Food:',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                      SizedBox(
+                        height: 300,
+                        child: ListView.builder(
+                          itemCount: _brandedFood!.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 15, bottom: 8),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  child: ListTile(
+                                    onTap: () {},
+                                    title: Text(
+                                        _brandedFood![index].foodName.toString()),
+                                    subtitle: Row(
+                                      children: [
+                                        Text(_brandedFood!
+                                            .elementAt(index)
+                                            .servingQty!
+                                            .toString()),
+                                        const SizedBox(width: 5),
+                                        Text(_brandedFood!
+                                            .elementAt(index)
+                                            .servingUnit!
+                                            .toString()),
+                                      ],
+                                    ),
+                                    leading: SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: Image.network(
+                                          _brandedFood!
+                                              .elementAt(index)
+                                              .photo!
+                                              .thumb
+                                              .toString(),
+                                          loadingBuilder:
+                                              (context, child, loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return CircularProgressIndicator();
+                                      }, fit: BoxFit.contain),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Text(user.displayName!),
-                  Text(user.email!),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: FutureBuilder(
-                  future: _getFoodData(),
-                  builder: (context, snapshot) {
-                    return ListView.builder(
-                      itemCount: _commonFood!.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(left: 15, bottom: 8),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: ListTile(
-                                title: Text(
-                                    _commonFood![index].foodName.toString()),
-                                leading: SizedBox(
-                                  height: 50,
-                                  width: 50,
-                                  child: Image.network(
-                                    _commonFood![index].photo!.thumb.toString(),
-                                    loadingBuilder:
-                                        (context, child, loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return CircularProgressIndicator();
-                                    },
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              Text('Branded :'),
-              Expanded(
-                child: FutureBuilder(
-                  future: _getFoodData(),
-                  builder: (context, snapshot) {
-                    return ListView.builder(
-                      itemCount: _brandedFood!.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Container(
-                              margin:
-                                  const EdgeInsets.only(left: 15, bottom: 8),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: ListTile(
-                                onTap: () {},
-                                title: Text(
-                                    _brandedFood![index].foodName.toString()),
-                                subtitle: Row(
-                                  children: [
-                                    Text(_brandedFood!
-                                        .elementAt(index)
-                                        .servingQty!
-                                        .toString()),
-                                    const SizedBox(width: 5),
-                                    Text(_brandedFood!
-                                        .elementAt(index)
-                                        .servingUnit!
-                                        .toString()),
-                                  ],
-                                ),
-                                leading: SizedBox(
-                                  height: 50,
-                                  width: 50,
-                                  child: Image.network(
-                                      _brandedFood!
-                                          .elementAt(index)
-                                          .photo!
-                                          .thumb
-                                          .toString(),
-                                      loadingBuilder:
-                                          (context, child, loadingProgress) {
-                                    if (loadingProgress == null) return child;
-                                    return CircularProgressIndicator();
-                                  }, fit: BoxFit.contain),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ));
+      ),
+    );
   }
 }

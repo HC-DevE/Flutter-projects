@@ -10,7 +10,7 @@ class MyTextField extends StatelessWidget {
       {super.key,
       this.controller,
       required this.hintText,
-      required this.isPassword});
+      required this.isPassword, Function(String p1)? onChanged});
 
   @override
   Widget build(BuildContext context) {

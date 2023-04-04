@@ -1,3 +1,48 @@
+import 'dart:convert';
+
+//Food Model Response
+class FoodModel {
+  List<Common>? common;
+  List<Branded>? branded;
+
+  FoodModel({this.common, this.branded});
+
+  FoodModel.fromJson(Map<String, dynamic> json) {
+    if (json['common'] != null) {
+      common = <Common>[];
+      json['common'].forEach((v) {
+        common?.add(Common.fromJson(v));
+      });
+    }
+    if (json['branded'] != null) {
+      branded = <Branded>[];
+      json['branded'].forEach((v) {
+        branded?.add(Branded.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (common != null) {
+      data['common'] = common?.map((v) => v.toJson()).toList();
+    }
+    if (branded != null) {
+      data['branded'] = branded?.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+FoodModel foodFromJson(String str) => FoodModel.fromJson(json.decode(str));
+String foodToJson(FoodModel data) => json.encode(data.toJson());
+
+//Common food model
+List<Common> commonFoodFromjson(String str) => List<Common>.from(
+    json.decode(str)['common'].map((x) => Common.fromJson(x)));
+String commonToJson(List<Common> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class Common {
   String? foodName;
   String? servingUnit;
@@ -45,6 +90,7 @@ class Common {
   }
 }
 
+//Photo Model included in common  and branded food
 class Photo {
   String? thumb;
   dynamic highres;
@@ -67,6 +113,7 @@ class Photo {
   }
 }
 
+//Branded food model
 class Branded {
   String? foodName;
   String? servingUnit;
@@ -130,37 +177,10 @@ class Branded {
   }
 }
 
-class FoodModel {
-  List<Common>? common;
-  List<Branded>? branded;
+List<Branded> brandedFoodFromjson(String str) => List<Branded>.from(json
+    .decode(str)['branded']
+    .map((x) => Branded.fromJson(Map<String, dynamic>.from(x))));
 
-  FoodModel({this.common, this.branded});
-
-  FoodModel.fromJson(Map<String, dynamic> json) {
-    if (json['common'] != null) {
-      common = <Common>[];
-      json['common'].forEach((v) {
-        common!.add(Common.fromJson(v));
-      });
-    }
-    if (json['branded'] != null) {
-      branded = <Branded>[];
-      json['branded'].forEach((v) {
-        branded!.add(Branded.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (common != null) {
-      data['common'] = common!.map((v) => v.toJson()).toList();
-    }
-    if (branded != null) {
-      data['branded'] = branded!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
+String brandedToJson(List<Branded> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

@@ -63,7 +63,7 @@ class NutritionixService {
   //   }
   // }
 
-  static Future<List<FoodModel>> fetchFood(String query) async {
+  static Future<FoodModel> fetchFood(String query) async {
     final response = await http.get(
       Uri.parse(NutritionixApiUrls.baseUrl +
           NutritionixApiUrlEndpoints.instantSearch +
@@ -77,25 +77,7 @@ class NutritionixService {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      final data = json.decode(response.body);
-      // var common = data["common"] as List;
-      // List<FoodModel> foodList =
-      //     common.map<FoodModel>((json) => FoodModel.fromJson(json)).toList();
-      // var branded = data["branded"] as List;
-      // foodList.addAll(
-      //     branded.map<FoodModel>((json) => FoodModel.fromJson(json)).toList());
-      // print('foodList : $foodList');
-      // return foodList;
-      var common = data["common"] as List;
-      List<Common> commonFood =
-          common.map<Common>((json) => Common.fromJson(json)).toList();
-      var branded = data["branded"] as List;
-      List<Branded> brandedFood =
-          branded.map<Branded>((json) => Branded.fromJson(json)).toList();
-
-      List<FoodModel> foodList = [];
-      foodList.add(FoodModel(common: commonFood, branded: brandedFood));
-      return foodList;
+      return foodFromJson(response.body);
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.

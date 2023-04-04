@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:watintake_dribble_design/components/search_bar.dart';
 import 'package:watintake_dribble_design/firebase_options.dart';
 import 'package:watintake_dribble_design/screens/home/auth_page.dart';
 import 'package:watintake_dribble_design/screens/home/welcome_screen.dart';
@@ -20,8 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
-      // home: AuthPage(),
+      // home: WelcomePage(),
+      home: SearchBar(),
     );
   }
 }
