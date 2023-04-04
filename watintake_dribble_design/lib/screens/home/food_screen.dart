@@ -4,19 +4,21 @@ import 'package:watintake_dribble_design/controllers/food_controller.dart';
 import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
 
 class FoodScreen extends StatefulWidget {
-  final String instantFoodQuery;
-  const FoodScreen({super.key, required this.instantFoodQuery,});
+  const FoodScreen({super.key});
 
   @override
   State<FoodScreen> createState() => _FoodScreenState();
 }
 
-final FoodController _foodController = Get.put(FoodController());
+late final String instantFoodQuery;
+final FoodController _foodController = Get.put(FoodController(
+  query: instantFoodQuery,
+));
 
 class _FoodScreenState extends State<FoodScreen> {
   @override
   Widget build(BuildContext context) {
-    _foodController.fetchFoods(widget.instantFoodQuery);
+    _foodController.fetchFoods(instantFoodQuery);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

@@ -6,12 +6,14 @@ class FoodController extends GetxController {
   var foods = FoodModel().obs;
   var isLoading = true.obs;
 
-  late String query;
+  late final String? query;
+
+  FoodController({this.query});
 
   @override
   void onInit() {
     super.onInit();
-    fetchFoods(query);
+    fetchFoods(query ?? 'apple');
   }
 
   void fetchFoods(String query) async {
