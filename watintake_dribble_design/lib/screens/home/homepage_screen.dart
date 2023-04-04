@@ -44,8 +44,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
   // }
 
   Future<void> _getFoodData() async {
-    _commonFood = await NutritionixService.fetchCommonFood('apple');
-    _brandedFood = await NutritionixService.fetchBrandedFood('apple');
+    // _commonFood = await NutritionixService.fetchCommonFood('apple');
+    // _brandedFood = await NutritionixService.fetchBrandedFood('apple');
+    final value = await NutritionixService.fetchFood('apple').then((value) => {
+          _commonFood = value[0].common,
+          _brandedFood = value[0].branded,
+    });
   }
 
   @override
@@ -95,8 +99,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               child: ListTile(
                                 title: Text(
                                     _commonFood![index].foodName.toString()),
-                                leading: Image.network(
-                                  _commonFood![index].photo!.thumb.toString(),
+                                leading: SizedBox(
+                                  height: 50,
+                                  width: 50,
+                                  child: Image.network(
+                                    _commonFood![index].photo!.thumb.toString(),
+                                    loadingBuilder:
+                                        (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return CircularProgressIndicator();
+                                    },
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),
@@ -133,10 +147,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                 ],
                               ),
                               child: ListTile(
-                                onTap: () {
-                                  print(
-                                      '${_brandedFood![index].foodName} tapped ');
-                                },
+                                onTap: () {},
                                 title: Text(
                                     _brandedFood![index].foodName.toString()),
                                 subtitle: Row(
@@ -145,17 +156,28 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         .elementAt(index)
                                         .servingQty!
                                         .toString()),
+                                    const SizedBox(width: 5),
                                     Text(_brandedFood!
                                         .elementAt(index)
                                         .servingUnit!
                                         .toString()),
                                   ],
                                 ),
-                                leading: Image.network(_brandedFood!
-                                    .elementAt(index)
-                                    .photo!
-                                    .thumb
-                                    .toString()),
+                                leading: SizedBox(
+                                  height: 50,
+                                  width: 50,
+                                  child: Image.network(
+                                      _brandedFood!
+                                          .elementAt(index)
+                                          .photo!
+                                          .thumb
+                                          .toString(),
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return CircularProgressIndicator();
+                                  }, fit: BoxFit.contain),
+                                ),
                               ),
                             ),
                           ],
