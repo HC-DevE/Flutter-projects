@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 
 class DailyGoalForm extends StatefulWidget {
-  const DailyGoalForm({super.key});
+  const DailyGoalForm({Key? key});
 
   @override
   DailyGoalFormState createState() => DailyGoalFormState();
 }
 
 class DailyGoalFormState extends State<DailyGoalForm> {
+  int currentStep = 0;
+  String? gender;
+  double? weight;
+  double? dailyGoal;
+  String? unit;
+
+  @override
+  void initState() {
+    super.initState();
+    gender = "male";
+    unit = "oz";
+  }
+
   @override
   Widget build(BuildContext context) {
-    int currentStep = 0;
-    String? gender;
-    double? weight;
-    double? dailyGoal;
-    String? unit;
 
     List<Step> formSteps = [
       Step(
@@ -24,26 +32,32 @@ class DailyGoalFormState extends State<DailyGoalForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Radio(
-                  value: 'male',
-                  groupValue: gender,
-                  onChanged: (value) {
-                    setState(() {
-                      gender = value;
-                    });
-                  },
+                SizedBox(
+                  width: 200.0,
+                  child: RadioListTile(
+                    title: const Text('Homme'),
+                    value: 'male',
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value as String?;
+                      });
+                    },
+                  ),
                 ),
-                Text('Homme'),
-                Radio(
-                  value: 'female',
-                  groupValue: gender,
-                  onChanged: (value) {
-                    setState(() {
-                      gender = value;
-                    });
-                  },
+                SizedBox(
+                  width: 200.0,
+                  child: RadioListTile(
+                    title: const Text('Femme'),
+                    value: 'female',
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value as String?;
+                      });
+                    },
+                  ),
                 ),
-                Text('Femme'),
               ],
             ),
             TextFormField(
@@ -51,7 +65,7 @@ class DailyGoalFormState extends State<DailyGoalForm> {
               decoration: InputDecoration(labelText: 'Poids (en kg)'),
               onChanged: (value) {
                 setState(() {
-                  weight = double.parse(value);
+                  weight = double.tryParse(value);
                 });
               },
             ),
@@ -69,6 +83,8 @@ class DailyGoalFormState extends State<DailyGoalForm> {
               onChanged: (value) {
                 setState(() {
                   dailyGoal = double.parse(value);
+                  print(
+                      'dailyGoal: $dailyGoal'); // Ajoutez cette ligne pour vérifier la valeur
                 });
               },
             ),
@@ -81,6 +97,8 @@ class DailyGoalFormState extends State<DailyGoalForm> {
               onChanged: (value) {
                 setState(() {
                   unit = value;
+                  print(
+                      'unit: $unit'); // Ajoutez cette ligne pour vérifier la valeur
                 });
               },
               decoration: InputDecoration(labelText: 'Unité de mesure'),
@@ -103,13 +121,16 @@ class DailyGoalFormState extends State<DailyGoalForm> {
               });
             },
             onStepCancel: () {
+              print("STEP CANCEL, STEP: $currentStep");
               if (currentStep > 0) {
+                print("In if");
                 setState(() {
                   currentStep--;
                 });
               }
             },
             onStepContinue: () {
+              print("STEP CONTINUE, STEP: $currentStep");
               if (currentStep < formSteps.length - 1) {
                 setState(() {
                   currentStep++;
