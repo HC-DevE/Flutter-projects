@@ -80,8 +80,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
               'Enter your email and we will send you a link to reset your password',
               textAlign: TextAlign.center,
@@ -99,9 +99,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ),
           MaterialButton(
             onPressed: () => passwordReset(),
-            child: const Text('Reset Password'),
             color: Colors.blue,
             textColor: Colors.white,
+            child: const Text('Reset Password'),
           )
         ],
       ),

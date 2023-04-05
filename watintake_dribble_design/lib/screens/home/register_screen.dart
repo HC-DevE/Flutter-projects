@@ -41,10 +41,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         //show snackbar
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: Colors.green,
-            content: const Text('Login Successful'),
-            duration: const Duration(seconds: 1),
+            content: Text('Login Successful'),
+            duration: Duration(seconds: 1),
           ),
         );
       } else {
@@ -53,10 +53,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         //show snackbar
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: Colors.red,
-            content: const Text('Passwords do not match'),
-            duration: const Duration(seconds: 1),
+            content:  Text('Passwords do not match'),
+            duration:  Duration(seconds: 1),
           ),
         );
       }

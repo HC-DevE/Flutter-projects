@@ -1,10 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:watintake_dribble_design/screens/home/login_screen.dart';
-
 import 'auth_page.dart';
-import 'homepage_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -20,14 +15,14 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           height: size.height * 0.9,
           child: Column(
             children: [
               Image.asset(
                 'lib/assets/images/welcome_screen.png',
               ),
-              Text(
+              const Text(
                 "Your body needs water !",
                 style: TextStyle(
                   fontSize: 32,
@@ -35,8 +30,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   color: Color(0xff70BDF2),
                 ),
               ),
-              SizedBox(height: 5),
-              SizedBox(
+              const SizedBox(height: 5),
+              const SizedBox(
                 width: 280,
                 child: Text(
                   "Track your daily water intake with just a few taps !",
@@ -54,7 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 height: 45,
                 width: 300,
                 decoration: BoxDecoration(
-                  color: Color(0xff70BDF2),
+                  color: const Color(0xff70BDF2),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Row(
@@ -66,11 +61,11 @@ class _WelcomePageState extends State<WelcomePage> {
                         Navigator.push<void>(
                           context,
                           MaterialPageRoute(
-                            builder: (BuildContext context) => AuthPage(),
+                            builder: (BuildContext context) => const AuthPage(),
                           ),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Get Started",
                         style: TextStyle(
                           fontSize: 20,
@@ -79,8 +74,8 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 10),
-                    Icon(Icons.arrow_forward, color: Colors.white),
+                    const SizedBox(width: 10),
+                    const Icon(Icons.arrow_forward, color: Colors.white),
                   ],
                 ),
               )
