@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:watintake_dribble_design/models/instant_search_api_data.dart';
 
 class FoodDetailScreen extends StatelessWidget {
-  final dynamic food;
+  FoodDetailScreen({Key? key}) : super(key: key);
 
-  const FoodDetailScreen({Key? key, required this.food}) : super(key: key);
+  final Common commonFood = Get.arguments;
+
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(food['foodName']),
+        title: Row(
+          children: [
+            Image.network(
+              commonFood.photo!.thumb!,
+              height: 30,
+              width: 30,
+            ),
+            const SizedBox(width: 10),
+            Text(commonFood.foodName.toString().toUpperCase()),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -20,10 +34,12 @@ class FoodDetailScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
-            _buildNutritionInfo('Calories', food['nfCalories'] ?? 0),
-            _buildNutritionInfo('Serving Size', '${food['servingQty']} ${food['servingUnit']}'),
-            _buildNutritionInfo('Brand', food['brandName'] ?? ''),
-            _buildNutritionInfo('Region', food['region']?.toString() ?? ''),
+            _buildNutritionInfo('Calories', 'nfCalories'),
+            _buildNutritionInfo(
+                'Serving Size',
+                "servingQty, servingUnit"),
+            _buildNutritionInfo('Brand', 'brandName'),
+            _buildNutritionInfo("Region", 'region'),
             SizedBox(height: 20),
             Text(
               'Ingredients',
@@ -31,7 +47,7 @@ class FoodDetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              food['brandNameItemName'] ?? '',
+              'brandName ItemName',
               style: TextStyle(fontSize: 16),
             ),
           ],
