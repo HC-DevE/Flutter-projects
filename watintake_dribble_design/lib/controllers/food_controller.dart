@@ -13,18 +13,24 @@ class FoodController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchFoods(query ?? 'apple');
+    if (query != null) {
+      fetchFoods(query!);
+    } else {
+      isLoading(false);
+    }
   }
 
   void fetchFoods(String query) async {
     try {
       isLoading(true);
       var foodsTemp = await NutritionixService.fetchFood(query);
-      if (foodsTemp != null) {
-        foods.value = foodsTemp;
-      }
+      foods.value = foodsTemp;
     } finally {
       isLoading(false);
     }
+  }
+
+  void clearFoods() {
+    foods.value = FoodModel();
   }
 }

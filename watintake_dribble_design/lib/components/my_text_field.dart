@@ -12,7 +12,7 @@ class MyTextField extends StatefulWidget {
     this.controller,
     required this.hintText,
     required this.isPassword,
-    this.onChanged, Null Function(dynamic value)? onTextChanged,
+    this.onChanged,
   });
 
   @override
