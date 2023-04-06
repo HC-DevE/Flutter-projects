@@ -17,7 +17,6 @@ class _HydratationPageState extends State<HydratationPage> {
   
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
     return Scaffold(
       body: const HydratationPageWidget(),
     );

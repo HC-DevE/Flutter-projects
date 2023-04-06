@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "293059584203",
+    "project_id": "hydratex-cd9d8",
+    "storage_bucket": "hydratex-cd9d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293059584203:android:78c37f4a5cbd4c0077fb4e",
+        "android_client_info": {
+          "package_name": "com.example.watintake_dribble_design"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293059584203-h42urpm1uaqvl0aog3sjlkim6vi99gd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLWF6xpjsnM93BlG29mpT051Qg-p3YtWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293059584203-h42urpm1uaqvl0aog3sjlkim6vi99gd1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

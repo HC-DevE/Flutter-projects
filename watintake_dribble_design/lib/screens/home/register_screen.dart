@@ -1,26 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:watintake_dribble_design/components/my_button.dart';
 import 'package:watintake_dribble_design/components/my_text_field.dart';
 import 'package:watintake_dribble_design/components/square_box_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:watintake_dribble_design/screens/home/reset_password_screen.dart';
 import 'package:watintake_dribble_design/services/auth_service.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   final Function()? onTap;
-  const LoginScreen({super.key, this.onTap});
+  const RegisterScreen({super.key, this.onTap});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  //text editing controllers
+class _RegisterScreenState extends State<RegisterScreen> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-  void signUserIn() async {
+  void signUserUp() async {
     //show loading circle
     showDialog(
       context: context,
@@ -28,23 +27,39 @@ class _LoginScreenState extends State<LoginScreen> {
         child: CircularProgressIndicator(),
       ),
     );
-    // try sign in
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text,
-        password: passwordController.text,
-      );
-      //close loading circle
-      Navigator.pop(context);
 
-      //show snackbar
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.green,
-          content: const Text('Login Successful'),
-          duration: const Duration(seconds: 1),
-        ),
-      );
+    // try sign up
+    try {
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: usernameController.text,
+          password: passwordController.text,
+        );
+
+        //close loading circle
+        Navigator.pop(context);
+
+        //show snackbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.green,
+            content: Text('Login Successful'),
+            duration: Duration(seconds: 1),
+          ),
+        );
+      } else {
+        //close loading circle
+        Navigator.pop(context);
+
+        //show snackbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content:  Text('Passwords do not match'),
+            duration:  Duration(seconds: 1),
+          ),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       //close loading circle
       Navigator.pop(context);
@@ -84,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 10),
                 //Second Text
                 const Text(
-                  'Hello again, please login to your account',
+                  'Let\'s create an account for you !',
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -104,42 +119,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: 'Password',
                   isPassword: true,
                 ),
-                const SizedBox(height: 10),
 
-                //forgot password
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          //forgot password
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return ResetPasswordScreen();
-                              },
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Forgot Password ?',
-                          style:
-                              TextStyle(color: Colors.grey[600], fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
+                const SizedBox(height: 10),
+                //confirm password textfield
+                MyTextField(
+                  controller: confirmPasswordController,
+                  hintText: 'Confirm password',
+                  isPassword: true,
                 ),
 
                 const SizedBox(height: 25),
 
                 //login button
                 MyButton(
-                  text: 'Sign In',
-                  onPressed: signUserIn,
+                  text: 'Sign Up',
+                  onPressed: signUserUp,
                 ),
                 const SizedBox(height: 25),
 
@@ -178,13 +172,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SquareButton(
-                      imagePath: 'lib/assets/images/google_icon_96.png',
-                      onTap: AuthService().signInWithGoogle,
+                      imagePath: 'lib/assets/images/google_icon_96.png', onTap: () => AuthService().signInWithGoogle(),
                     ),
                     const SizedBox(width: 10),
                     SquareButton(
-                      imagePath: 'lib/assets/images/welcome_screen.png',
-                      onTap: () {},
+                      imagePath: 'lib/assets/images/welcome_screen.png', onTap: () {  },
                     ),
                   ],
                 ),
@@ -195,16 +187,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Not a member ?',
+                    const Text(
+                      'Already have an account ?',
                       style: TextStyle(
                         fontSize: 14,
                       ),
                     ),
                     GestureDetector(
                       onTap: widget.onTap,
-                      child: Text(
-                        '  Register Now ',
+                      child: const Text(
+                        '  Sign in now ',
                         style: TextStyle(color: Colors.blue, fontSize: 14),
                       ),
                     ),
@@ -218,4 +210,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

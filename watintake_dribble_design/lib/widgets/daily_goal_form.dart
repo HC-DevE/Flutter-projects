@@ -96,7 +96,7 @@ class DailyGoalFormState extends State<DailyGoalForm> {
               ],
               onChanged: (value) {
                 setState(() {
-                  unit = value;
+                  unit = value.toString();
                   print(
                       'unit: $unit'); // Ajoutez cette ligne pour vérifier la valeur
                 });
