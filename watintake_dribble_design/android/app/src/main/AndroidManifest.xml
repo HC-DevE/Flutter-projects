@@ -2,7 +2,7 @@
     package="com.example.watintake_dribble_design">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="watintake_dribble_design"
+        android:label="HydrateX"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

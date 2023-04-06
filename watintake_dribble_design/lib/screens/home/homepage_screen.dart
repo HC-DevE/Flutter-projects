@@ -68,6 +68,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: Color(0xff70BDF2),
                 ),
               ),
             ],
