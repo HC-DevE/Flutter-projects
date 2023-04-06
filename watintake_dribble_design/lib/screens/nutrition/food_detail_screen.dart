@@ -11,7 +11,7 @@ class FoodDetailScreen extends StatefulWidget {
 
 class _FoodDetailScreenState extends State<FoodDetailScreen> {
   Common commonFood = Get.arguments ;
-  Branded brandedFood = Get.arguments;
+  // Branded brandedFood = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,14 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
       appBar: AppBar(
         title: Row(
           children: [
-            Image.network(
-              commonFood.photo!.thumb!,
-              height: 30,
-              width: 30,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                commonFood.photo!.thumb!,
+                height: 30,
+                width: 30,
+                fit: BoxFit.contain,
+              ),
             ),
             const SizedBox(width: 10),
             Text(commonFood.foodName.toString().toUpperCase()),
