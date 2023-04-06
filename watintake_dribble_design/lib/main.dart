@@ -25,9 +25,12 @@ class MyApp extends StatelessWidget {
       title: 'HydrateX',
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => HomePageScreen()),
+        GetPage(name: '/', page: () => const HomePageScreen()),
         GetPage(name: '/detail', page: () => FoodDetailScreen()),
       ],
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       debugShowCheckedModeBanner: false,
       home: WelcomePage(),
     );

@@ -6,6 +6,8 @@ class MyTextField extends StatefulWidget {
   final String hintText;
   final bool isPassword;
   final void Function(String)? onChanged;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   const MyTextField({
     super.key,
@@ -13,6 +15,7 @@ class MyTextField extends StatefulWidget {
     required this.hintText,
     required this.isPassword,
     this.onChanged,
+    this.suffixIcon, this.prefixIcon,
   });
 
   @override
@@ -20,7 +23,6 @@ class MyTextField extends StatefulWidget {
 }
 
 class _MyTextFieldState extends State<MyTextField> {
- 
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,15 +32,17 @@ class _MyTextFieldState extends State<MyTextField> {
         controller: widget.controller,
         obscureText: widget.isPassword,
         decoration: InputDecoration(
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.suffixIcon,
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade400),
+            borderSide: BorderSide(color: Color(0xff70BDF2)),
             borderRadius: BorderRadius.circular(12),
           ),
-          fillColor: Colors.grey.shade200,
+          fillColor: Colors.white,
           filled: true,
           hintText: widget.hintText,
           hintStyle: const TextStyle(

@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:watintake_dribble_design/components/search_bar.dart';
 import 'package:watintake_dribble_design/controllers/food_controller.dart';
-import 'package:watintake_dribble_design/models/instant_search_api_data.dart';
-import 'package:watintake_dribble_design/services/nutritionix_api_service.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -30,9 +28,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        // toolbarHeight: 0,
         backgroundColor: Colors.transparent,
         actions: const [
           IconButton(onPressed: signUserOut, icon: Icon(Icons.logout)),
@@ -46,7 +45,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               const SizedBox(
                 child: SearchBar(),
               ),
-              const SizedBox(height: 20),
+              // const SizedBox(height: 10),
               Expanded(
                 child: Obx(() {
                   if (_foodController.isLoading.value) {
@@ -54,29 +53,71 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   } else {
                     if (_foodController.foods.value.common!.isNotEmpty &&
                         _foodController.foods.value.branded!.isNotEmpty) {
-                      return ListView.builder(
-                        itemCount: _foodController.foods.value.common!.length,
-                        itemBuilder: (context, index) {
-                          final commonfood =
-                              _foodController.foods.value.common![index];
-                          return ListTile(
-                            title: Text(commonfood.foodName.toString()),
-                            leading: Image.network(
-                              commonfood.photo!.thumb.toString(),
-                              width: 50,
-                              height: 50,
+                      return Column(
+                        children: [
+                          const Text('Common foods'),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount:
+                                  _foodController.foods.value.common!.length,
+                              itemBuilder: (context, index) {
+                                final commonfood =
+                                    _foodController.foods.value.common![index];
+                                return ListTile(
+                                  title: Text(commonfood.foodName.toString()),
+                                  leading: Image.network(
+                                    commonfood.photo!.thumb.toString(),
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                                  onTap: () {
+                                    // Navigate to detail screen
+                                    // Get.toNamed('/detail', arguments:{ 'foods': _foodController.foods.value, 'selectedIndex': index});
+                                    Get.toNamed('/detail',
+                                        arguments: commonfood);
+                                    // Navigator.pushNamed(context, '/detail');
+                                  },
+                                );
+                              },
                             ),
-                            onTap: () {
-                              // Navigate to detail screen
-                              // Get.toNamed('/detail', arguments:{ 'foods': _foodController.foods.value, 'selectedIndex': index});
-                              Get.toNamed('/detail', arguments: commonfood);
-                              // Navigator.pushNamed(context, '/detail');
-                            },
-                          );
-                        },
+                          ),
+                          const Divider(),
+                          const Text('Branded foods'),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount:
+                                  _foodController.foods.value.branded!.length,
+                              itemBuilder: (context, index) {
+                                final brandedfood =
+                                    _foodController.foods.value.branded![index];
+                                return ListTile(
+                                  title: Text(brandedfood.foodName.toString()),
+                                  leading: Image.network(
+                                    brandedfood.photo!.thumb.toString(),
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                                  onTap: () {
+                                    // Navigate to detail screen
+                                    // Get.toNamed('/detail', arguments:{ 'foods': _foodController.foods.value, 'selectedIndex': index});
+                                    Get.toNamed('/detail',
+                                        arguments: brandedfood);
+                                    // Navigator.pushNamed(context, '/detail');
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       );
                     } else {
-                      return const Center(child: Text('No data found'));
+                      if (_foodController.foods.value.common!.isEmpty &&
+                          _foodController.foods.value.branded!.isEmpty) {
+                        return const Center(child: Text('No data found'));
+                          } else {
+                            return const Center(child: Text('No data found'));
+                          }
+                      // return const Center(child: Text('No data found'));
                     }
                   }
                 }),
