@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watintake_dribble_design/models/instant_search_api_data.dart';
 
-class FoodDetailScreen extends StatelessWidget {
-  FoodDetailScreen({Key? key}) : super(key: key);
+class FoodDetailScreen extends StatefulWidget {
+  const FoodDetailScreen({Key? key}) : super(key: key);
 
-  final Common commonFood = Get.arguments;
+  @override
+  State<FoodDetailScreen> createState() => _FoodDetailScreenState();
+}
 
-  
+class _FoodDetailScreenState extends State<FoodDetailScreen> {
+  Common commonFood = Get.arguments ;
+  Branded brandedFood = Get.arguments;
 
   @override
   Widget build(BuildContext context) {

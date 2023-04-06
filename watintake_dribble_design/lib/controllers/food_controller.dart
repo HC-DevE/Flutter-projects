@@ -5,7 +5,6 @@ import 'package:watintake_dribble_design/services/nutritionix_api_service.dart';
 class FoodController extends GetxController {
   var foods = FoodModel().obs;
   var isLoading = true.obs;
-
   late final String? query;
 
   FoodController({this.query});
@@ -17,6 +16,7 @@ class FoodController extends GetxController {
       fetchFoods(query!);
     } else {
       isLoading(false);
+      clearFoods();
     }
   }
 
