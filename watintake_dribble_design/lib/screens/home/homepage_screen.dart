@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:watintake_dribble_design/components/search_bar.dart';
 import 'package:watintake_dribble_design/controllers/food_controller.dart';
+import 'package:watintake_dribble_design/screens/home/search_bar_screen.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -19,7 +20,6 @@ void signUserOut() {
 
 class _HomePageScreenState extends State<HomePageScreen> {
   final user = FirebaseAuth.instance.currentUser;
-  final FoodController _foodController = Get.put(FoodController());
 
   @override
   void initState() {
@@ -29,104 +29,50 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        // toolbarHeight: 0,
-        backgroundColor: Colors.transparent,
-        actions: const [
-          IconButton(onPressed: signUserOut, icon: Icon(Icons.logout)),
-        ],
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        appBar: AppBar(
+          // elevation: 0,
+          // toolbarHeight: 0,
+          backgroundColor: Colors.transparent,
+          actions: const [
+            IconButton(onPressed: signUserOut, icon: Icon(Icons.logout)),
+          ],
+        ),
+        body: Container(
+          child: Row(
             children: [
-              const SizedBox(
-                child: SearchBar(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SearchBarScreen(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.only(right: 5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xff70BDF2),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ),
               ),
-              // const SizedBox(height: 10),
-              Expanded(
-                child: Obx(() {
-                  if (_foodController.isLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    if (_foodController.foods.value.common!.isNotEmpty &&
-                        _foodController.foods.value.branded!.isNotEmpty) {
-                      return Column(
-                        children: [
-                          const Text('Common foods'),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount:
-                                  _foodController.foods.value.common!.length,
-                              itemBuilder: (context, index) {
-                                final commonfood =
-                                    _foodController.foods.value.common![index];
-                                return ListTile(
-                                  title: Text(commonfood.foodName.toString()),
-                                  leading: Image.network(
-                                    commonfood.photo!.thumb.toString(),
-                                    width: 50,
-                                    height: 50,
-                                  ),
-                                  onTap: () {
-                                    // Navigate to detail screen
-                                    // Get.toNamed('/detail', arguments:{ 'foods': _foodController.foods.value, 'selectedIndex': index});
-                                    Get.toNamed('/detail',
-                                        arguments: commonfood);
-                                    // Navigator.pushNamed(context, '/detail');
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                          const Divider(),
-                          const Text('Branded foods'),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount:
-                                  _foodController.foods.value.branded!.length,
-                              itemBuilder: (context, index) {
-                                final brandedfood =
-                                    _foodController.foods.value.branded![index];
-                                return ListTile(
-                                  title: Text(brandedfood.foodName.toString()),
-                                  leading: Image.network(
-                                    brandedfood.photo!.thumb.toString(),
-                                    width: 50,
-                                    height: 50,
-                                  ),
-                                  onTap: () {
-                                    // Navigate to detail screen
-                                    // Get.toNamed('/detail', arguments:{ 'foods': _foodController.foods.value, 'selectedIndex': index});
-                                    Get.toNamed('/detail',
-                                        arguments: brandedfood);
-                                    // Navigator.pushNamed(context, '/detail');
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      );
-                    } else {
-                      if (_foodController.foods.value.common!.isEmpty &&
-                          _foodController.foods.value.branded!.isEmpty) {
-                        return const Center(child: Text('No data found'));
-                          } else {
-                            return const Center(child: Text('No data found'));
-                          }
-                      // return const Center(child: Text('No data found'));
-                    }
-                  }
-                }),
+              const SizedBox(height: 10),
+              const Text(
+                'Search for food',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 
