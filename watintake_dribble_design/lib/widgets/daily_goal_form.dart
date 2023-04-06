@@ -25,54 +25,55 @@ class DailyGoalFormState extends State<DailyGoalForm> {
   Widget build(BuildContext context) {
 
     List<Step> formSteps = [
-      Step(
-        title: Text('Informations personnelles'),
-        content: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                SizedBox(
-                  width: 200.0,
-                  child: RadioListTile(
-                    title: const Text('Homme'),
-                    value: 'male',
-                    groupValue: gender,
-                    onChanged: (value) {
-                      setState(() {
-                        gender = value as String?;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: 200.0,
-                  child: RadioListTile(
-                    title: const Text('Femme'),
-                    value: 'female',
-                    groupValue: gender,
-                    onChanged: (value) {
-                      setState(() {
-                        gender = value as String?;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Poids (en kg)'),
+    Step(
+  title: Text('Informations personnelles'),
+  content: Column(
+    children: <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: RadioListTile(
+              title: const Text('Homme',style: TextStyle(fontSize: 10)),
+              value: 'male',
+              groupValue: gender,
               onChanged: (value) {
                 setState(() {
-                  weight = double.tryParse(value);
+                  gender = value as String?;
                 });
               },
             ),
-          ],
-        ),
-        isActive: true,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: RadioListTile(
+              title: const Text('Femme',style: TextStyle(fontSize: 10)),
+              value: 'female',
+              groupValue: gender,
+              onChanged: (value) {
+                setState(() {
+                  gender = value as String?;
+                });
+              },
+            ),
+          ),
+        ],
       ),
+      TextFormField(
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(labelText: 'Poids (en kg)'),
+        onChanged: (value) {
+          setState(() {
+            weight = double.tryParse(value);
+          });
+        },
+      ),
+    ],
+  ),
+  isActive: true,
+),
+
       Step(
         title: Text('Objectifs quotidiens'),
         content: Column(

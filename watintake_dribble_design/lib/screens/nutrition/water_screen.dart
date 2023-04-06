@@ -18,7 +18,7 @@ class _HydratationPageState extends State<HydratationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Daily Hydration'),
+        title: const Text('Daily Hydratation'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
