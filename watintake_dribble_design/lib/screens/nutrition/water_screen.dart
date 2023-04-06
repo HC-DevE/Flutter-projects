@@ -4,22 +4,19 @@ import 'package:watintake_dribble_design/widgets/daily_goal_form.dart';
 import '../../widgets/water_bottle.dart';
 
 class HydratationPage extends StatefulWidget {
-  const HydratationPage({Key? key});
+  const HydratationPage({super.key});
 
   @override
   State<HydratationPage> createState() => _HydratationPageState();
 }
 
 class _HydratationPageState extends State<HydratationPage> {
-  double? dailyGoal = null;
+  double? dailyGoal;
   double? currentWater = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Daily Hydration'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -30,7 +27,7 @@ class _HydratationPageState extends State<HydratationPage> {
                 child: WaterBottle(
                     currentWater: currentWater!, dailyGoal: dailyGoal!),
               ),
-            if (dailyGoal == null)
+              if (dailyGoal == null)
               ElevatedButton(
                 onPressed: () => _dialogBuilder(context),
                 child: const Text('Set your daily goal for water intake'),
@@ -48,7 +45,7 @@ class _HydratationPageState extends State<HydratationPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           'Current Water intake',
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold),
@@ -56,7 +53,7 @@ class _HydratationPageState extends State<HydratationPage> {
                         const SizedBox(height: 16),
                         Text(
                           '${currentWater?.toStringAsFixed(1) ?? '0.0'} oz',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 36, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 16),

@@ -6,6 +6,7 @@ import 'package:watintake_dribble_design/components/square_box_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:watintake_dribble_design/screens/home/reset_password_screen.dart';
 import 'package:watintake_dribble_design/services/auth_service.dart';
+import 'package:watintake_dribble_design/services/nutritionix_api_service.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function()? onTap;
@@ -17,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   //text editing controllers
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   void signUserIn() async {
@@ -31,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // try sign in
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text,
+        email: emailController.text,
         password: passwordController.text,
       );
       //close loading circle
@@ -67,18 +68,24 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.lock,
-                  size: 100,
+                //logo
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Padding(
+                padding: const EdgeInsets.only(bottom: 28.0),
+                child: Image.asset(
+                  'lib/assets/images/logo.png',
+                  height: 100,
+                ),
+                  ),
                 ),
                 const SizedBox(height: 25),
                 //First Text
                 Text(
                   'Login',
                   style: GoogleFonts.bebasNeue(
-                    fontSize: 36,
+                    fontSize: 32,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -86,13 +93,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Text(
                   'Hello again, please login to your account',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                   ),
                 ),
                 const SizedBox(height: 30),
                 //email textfield
                 MyTextField(
-                  controller: usernameController,
+                  controller: emailController,
                   hintText: 'Email',
                   isPassword: false,
                 ),
@@ -218,4 +225,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
