@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:watintake_dribble_design/models/photo_model.dart';
+
 //Food Model Response
 class FoodModel {
   List<Common>? common;
@@ -91,27 +93,6 @@ class Common {
 }
 
 //Photo Model included in common  and branded food
-class Photo {
-  String? thumb;
-  dynamic highres;
-  bool? isUserUploaded;
-
-  Photo({this.thumb, this.highres, this.isUserUploaded});
-
-  Photo.fromJson(Map<String, dynamic> json) {
-    thumb = json['thumb'];
-    highres = json['highres'];
-    isUserUploaded = json['is_user_uploaded'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['thumb'] = thumb;
-    data['highres'] = highres;
-    data['is_user_uploaded'] = isUserUploaded;
-    return data;
-  }
-}
 
 //Branded food model
 class Branded {

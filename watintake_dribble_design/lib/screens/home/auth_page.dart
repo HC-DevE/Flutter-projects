@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
+import 'package:watintake_dribble_design/screens/home/landing_page.dart';
 
 import 'login_register_screen.dart';
 
@@ -15,7 +15,7 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
           // user is logged in
           if (snapshot.hasData) {
-            return const HomePageScreen();
+            return const LandingPage();
           }
           //user not logged in
           else {

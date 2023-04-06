@@ -34,7 +34,7 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
                         _foodController.foods.value.branded!.isNotEmpty) {
                       return Column(
                         children: [
-                          const Text('Common foods'),
+                          const Text('Common foods', textAlign: TextAlign.start),
                           Expanded(
                             child: ListView.builder(
                               itemCount:

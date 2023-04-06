@@ -15,6 +15,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  // final firstnameController = TextEditingController();
+  // final lastnameController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -55,8 +57,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: Colors.red,
-            content:  Text('Passwords do not match'),
-            duration:  Duration(seconds: 1),
+            content: Text('Passwords do not match'),
+            duration: Duration(seconds: 1),
           ),
         );
       }
@@ -82,29 +84,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.lock,
-                  size: 100,
+                Image.asset(
+                  'lib/assets/images/logo.png',
+                  height: 100,
                 ),
                 const SizedBox(height: 25),
                 //First Text
                 Text(
-                  'Login',
+                  'Sign Up',
                   style: GoogleFonts.bebasNeue(
-                    fontSize: 36,
+                    fontSize: 32,
                   ),
                 ),
                 const SizedBox(height: 10),
-                //Second Text
+                // Second Text
                 const Text(
                   'Let\'s create an account for you !',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                   ),
                 ),
                 const SizedBox(height: 30),
+                //Username field
+                MyTextField(
+                  controller: usernameController,
+                  hintText: 'Username',
+                  isPassword: false,
+                ),
+                const SizedBox(height: 10),
                 //email textfield
                 MyTextField(
                   controller: usernameController,
@@ -172,11 +180,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SquareButton(
-                      imagePath: 'lib/assets/images/google_icon_96.png', onTap: () => AuthService().signInWithGoogle(),
+                      imagePath: 'lib/assets/images/google_icon_96.png',
+                      onTap: () => AuthService().signInWithGoogle(),
                     ),
                     const SizedBox(width: 10),
                     SquareButton(
-                      imagePath: 'lib/assets/images/welcome_screen.png', onTap: () {  },
+                      imagePath: 'lib/assets/images/apple_logo.png',
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Coming soon'),
+                                  content:
+                                      const Text('This feature is coming soon'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text('Ok'))
+                                  ],
+                                ));
+                      },
                     ),
                   ],
                 ),
