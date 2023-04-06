@@ -1,58 +1,49 @@
 import 'package:flutter/material.dart';
 
-
 class WaterBottle extends StatelessWidget {
-  final double? currentWater;
-  final double? dailyGoal;
+  final double currentWater;
+  final double dailyGoal;
 
-  const WaterBottle({Key? key, this.currentWater, this.dailyGoal})
-      : super(key: key);
+  const WaterBottle({required this.currentWater, required this.dailyGoal});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Bouteille d'eau vide
-        Image.asset(
-          "lib/assets/images/water_bottle.png",
-          width: 200,
-          height: 400,
-        ),
-        // Eau actuelle
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Container(
-            height: (currentWater ?? 0) / (dailyGoal ?? 1) * 300,
-            color: Colors.blue,
+    final percentage = (currentWater / dailyGoal).clamp(0.0, 1.0);
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Current Water Intake',
+            style: TextStyle(color: Colors.white),
           ),
-        ),
-        // Ligne pourcentage
-        Positioned(
-          bottom: (dailyGoal ?? 1) / 100 * 300,
-          left: 0,
-          right: 0,
-          child: Container(
-            height: 2,
-            color: Colors.black,
+          SizedBox(height: 8),
+          LinearProgressIndicator(
+            value: percentage,
+            backgroundColor: Colors.white,
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
           ),
-        ),
-        // Texte pourcentage
-        Positioned(
-          bottom: (dailyGoal ?? 1) / 100 * 300 - 10,
-          left: 0,
-          right: 0,
-          child: Text(
-            '${(currentWater ?? 0) / (dailyGoal ?? 1) * 100}% objectif',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '${currentWater.toStringAsFixed(0)} ml',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                '${dailyGoal.toStringAsFixed(0)} ml',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
