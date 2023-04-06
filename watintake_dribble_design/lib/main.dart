@@ -5,6 +5,7 @@ import 'package:watintake_dribble_design/firebase_options.dart';
 import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
 import 'package:watintake_dribble_design/screens/home/welcome_screen.dart';
 import 'package:watintake_dribble_design/screens/nutrition/food_detail_screen.dart';
+import 'package:watintake_dribble_design/screens/nutrition/water_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home: HydratationPage(),
     );
   }
 }
