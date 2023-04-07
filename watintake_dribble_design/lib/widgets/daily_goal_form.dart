@@ -29,18 +29,20 @@ class DailyGoalFormState extends State<DailyGoalForm> {
   Future<void> _initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
   }
-void _saveFormValues() {
-  _prefs.setString('gender', gender ?? '');
-  _prefs.setDouble('weight', weight ?? 0.0);
-  _prefs.setDouble('height', height ?? 0.0);
-  _prefs.setDouble('dailyGoal', dailyGoal ?? 0.0);
-  _prefs.setString('unit', unit ?? '');
-}
+
+  void _saveFormValues() {
+    _prefs.setString('gender', gender ?? '');
+    _prefs.setDouble('weight', weight ?? 0.0);
+    _prefs.setDouble('height', height ?? 0.0);
+    _prefs.setDouble('dailyGoal', dailyGoal ?? 0.0);
+    _prefs.setString('unit', unit ?? '');
+  }
 
   // void _loadFormValues() {
   //   setState(() {
   //     gender = _prefs.getString('gender');
   //     weight = _prefs.getDouble('weight');
+  //     height = _prefs.getDouble('height');
   //     dailyGoal = _prefs.getDouble('dailyGoal');
   //     unit = _prefs.getString('unit');
   //   });
@@ -49,61 +51,61 @@ void _saveFormValues() {
   @override
   Widget build(BuildContext context) {
     List<Step> formSteps = [
-Step(
-  title: const Text('Informations personnelles'),
-  content: Column(
-    children: <Widget>[
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          ToggleButtons(
-            isSelected: gender == 'male' || gender == null
-                ? [true, false]
-                : [false, true],
-            onPressed: (index) {
-              setState(() {
-                gender = index == 0 ? 'male' : 'female';
-                _saveFormValues();
-              });
-            },
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.grey[400],
-            selectedColor: Colors.white,
-            fillColor: Theme.of(context).primaryColor,
-            selectedBorderColor: Theme.of(context).primaryColor,
-            children: const <Widget>[
-              Text('Homme'),
-              Text('Femme'),
-            ],
-          ),
-        ],
+      Step(
+        title: const Text('Informations personnelles'),
+        content: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                ToggleButtons(
+                  isSelected: gender == 'male' || gender == null
+                      ? [true, false]
+                      : [false, true],
+                  onPressed: (index) {
+                    setState(() {
+                      gender = index == 0 ? 'male' : 'female';
+                      _saveFormValues();
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey[400],
+                  selectedColor: Colors.white,
+                  fillColor: Theme.of(context).primaryColor,
+                  selectedBorderColor: Theme.of(context).primaryColor,
+                  children: const <Widget>[
+                    Text('Homme'),
+                    Text('Femme'),
+                  ],
+                ),
+              ],
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: 'Poids (en kg)'),
+              onChanged: (value) {
+                setState(() {
+                  weight = double.tryParse(value);
+                  _saveFormValues();
+                });
+              },
+              initialValue: weight?.toStringAsFixed(2),
+            ),
+            TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(labelText: 'Taille (en cm)'),
+              onChanged: (value) {
+                setState(() {
+                  height = double.tryParse(value);
+                  _saveFormValues();
+                });
+              },
+              initialValue: height?.toStringAsFixed(2),
+            ),
+          ],
+        ),
+        isActive: true,
       ),
-      TextFormField(
-        keyboardType: TextInputType.number,
-        decoration: const InputDecoration(labelText: 'Poids (en kg)'),
-        onChanged: (value) {
-          setState(() {
-            weight = double.tryParse(value);
-            _saveFormValues();
-          });
-        },
-        initialValue: weight?.toStringAsFixed(2),
-      ),
-      TextFormField(
-        keyboardType: TextInputType.number,
-        decoration: const InputDecoration(labelText: 'Taille (en cm)'),
-        onChanged: (value) {
-          setState(() {
-            height = double.tryParse(value);
-            _saveFormValues();
-          });
-        },
-        initialValue: height?.toStringAsFixed(2),
-      ),
-    ],
-  ),
-  isActive: true,
-),
       Step(
         title: const Text('Objectifs quotidiens'),
         content: Column(

@@ -20,8 +20,8 @@ class ProfilePage extends StatelessWidget {
           signUserOut();
           Navigator.pop(context);
         },
-        child: const Icon(Icons.logout_outlined),
         backgroundColor: Colors.red[400],
+        child: const Icon(Icons.logout_outlined),
       ),
       appBar: AppBar(
         elevation: 0,
@@ -67,7 +67,7 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   user?.email ?? 'john.doe@example.com',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
