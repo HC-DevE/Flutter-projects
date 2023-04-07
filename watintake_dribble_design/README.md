@@ -1,19 +1,18 @@
 # watintake_hydrateX
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Watintake est une aplication qui permet de définir un objectif quotidien d'hydratation, et de suivre son hydratation au cours de la journée en ajoutant les quantités consommées. 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    Version de flutter : 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutter 3.7.9 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 62bd79521d (8 days ago) • 2023-03-30 10:59:36 -0700
+Engine • revision ec975089ac
+Tools • Dart 2.19.6 • DevTools 2.20.1
+
+
 
 // nutritionix API URL: 
 //ID: 29e1a47d 
@@ -26,3 +25,6 @@ samples, guidance on mobile development, and a full API reference.
     -x-app-id: 29e1a47d 
     -x-app-key: 8cd406e41e5fccc4a7a4ab9b94965a32 
     x-remote-user-id: 0 for developer mode //
+
+
+
