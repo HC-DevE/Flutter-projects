@@ -37,7 +37,6 @@ class _LandingPageState extends State<LandingPage> {
     const HydratationPage(),
     const WorkoutScreen(),
     const SettingsPage(),
-    // const ProfilePage(),
   ];
 
   @override

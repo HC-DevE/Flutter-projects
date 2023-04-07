@@ -11,6 +11,7 @@ class HomePageScreen extends StatefulWidget {
 
 class _HomePageScreenState extends State<HomePageScreen> {
   final user = FirebaseAuth.instance.currentUser;
+
   @override
   void initState() {
     super.initState();
@@ -52,43 +53,63 @@ class _HomePageScreenState extends State<HomePageScreen> {
           ),
         ),
         const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 10),
-            const Text(
-              'Search for food ?',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff70BDF2),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SearchBarScreen(),
               ),
+            );
+          },
+          child: Container(
+            height: 60,
+            width: 300,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color:  Color(0xffc9b6d7),
+              borderRadius: BorderRadius.circular(10),
             ),
-            const SizedBox(width: 10),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SearchBarScreen(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const SizedBox(height: 10),
+                const Text(
+                  'Search for food ?',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                );
-              },
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.only(right: 5),
-                decoration: BoxDecoration(
-                  color: const Color(0xff70BDF2),
-                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: Colors.white,
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchBarScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(right: 5),
+                    decoration: BoxDecoration(
+                      color: Color(0xfff6cadd),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
         Center(
           child: Container(

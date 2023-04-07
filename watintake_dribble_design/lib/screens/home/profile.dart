@@ -15,6 +15,14 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          signUserOut();
+          Navigator.pop(context);
+        },
+        child: const Icon(Icons.logout_outlined),
+        backgroundColor: Colors.red[400],
+      ),
       appBar: AppBar(
         elevation: 0,
         title: const Text('Profile',
@@ -34,13 +42,6 @@ class ProfilePage extends StatelessWidget {
             },
             icon: const Icon(Icons.edit_outlined),
           ),
-          IconButton(
-            onPressed: () {
-              signUserOut();
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.logout),
-          ),
         ],
       ),
       body: SafeArea(
@@ -56,16 +57,16 @@ class ProfilePage extends StatelessWidget {
                   backgroundImage: NetworkImage(user!.photoURL.toString()),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'John Doe',
-                  style: TextStyle(
+                Text(
+                  user?.displayName.toString() ?? 'John Doe',
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'john.doe@example.com',
+                Text(
+                  user?.email ?? 'john.doe@example.com',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
