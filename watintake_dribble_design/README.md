@@ -13,6 +13,9 @@ Framework • revision 62bd79521d (8 days ago) • 2023-03-30 10:59:36 -0700
 Engine • revision ec975089ac
 Tools • Dart 2.19.6 • DevTools 2.20.1
 
+compte de test pour se login : 
+id : paul1@gmail.com
+mdp : paul123
 
 
 // nutritionix API URL: 
