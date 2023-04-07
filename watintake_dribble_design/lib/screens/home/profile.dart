@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
+
+  final user = FirebaseAuth.instance.currentUser;
 
   static void signUserOut() {
     GoogleSignIn().signOut();
@@ -48,11 +50,10 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   backgroundColor: Colors.transparent,
                   radius: 50,
-                  backgroundImage:
-                      AssetImage('lib/assets/images/profile_icon.png'),
+                  backgroundImage: NetworkImage(user!.photoURL.toString()),
                 ),
                 const SizedBox(height: 16),
                 const Text(
