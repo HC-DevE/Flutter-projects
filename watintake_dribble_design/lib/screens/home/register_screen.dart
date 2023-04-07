@@ -18,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // final firstnameController = TextEditingController();
   // final lastnameController = TextEditingController();
   final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
@@ -115,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 10),
                 //email textfield
                 MyTextField(
-                  controller: usernameController,
+                  controller: emailController,
                   hintText: 'Email',
                   isPassword: false,
                 ),

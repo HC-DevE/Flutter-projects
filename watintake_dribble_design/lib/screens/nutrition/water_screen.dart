@@ -16,6 +16,25 @@ class _HydratationPageState extends State<HydratationPage> {
   double? currentWater = 0;
   String? unit;
 
+  late SharedPreferences _prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPrefs();
+    _loadDailyGoal();
+    _loadUnit();
+    _loadCurrentWater();
+  }
+
+  Future<void> _initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  void _saveCurrentWaterValue() {
+    _prefs.setDouble('currentWater', currentWater ?? 0.0);
+  }
+
   void _loadDailyGoal() async {
     final prefs = await SharedPreferences.getInstance();
     final dailyGoal = prefs.getDouble('dailyGoal');
@@ -26,7 +45,7 @@ class _HydratationPageState extends State<HydratationPage> {
     }
   }
 
-  void _loadunit() async {
+  void _loadUnit() async {
     final prefs = await SharedPreferences.getInstance();
     final unit = prefs.getString('unit');
     if (unit != null) {
@@ -36,16 +55,20 @@ class _HydratationPageState extends State<HydratationPage> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    // _loadDailyGoal();
-    // _loadunit();
+  void _loadCurrentWater() async {
+    final prefs = await SharedPreferences.getInstance();
+    final currentWater = prefs.getDouble('currentWater');
+    if (currentWater != null) {
+      setState(() {
+        this.currentWater = currentWater;
+      });
+    }
   }
 
   void _resetCurrentWater() {
     setState(() {
       currentWater = 0;
+      _saveCurrentWaterValue();
     });
   }
 
@@ -66,32 +89,39 @@ class _HydratationPageState extends State<HydratationPage> {
                 ),
               ),
             if (dailyGoal == null)
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.blue[100],
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Set your daily goal for water intake',
-                            style: TextStyle(
-                              fontSize: 24,
+              Container(
+                margin: const EdgeInsets.only(top: 40),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Set your Daily Goal for water intake',
+                          style: TextStyle(
+                              fontSize: 30,
                               fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          ElevatedButton(
+                              color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 50),
+                        ElevatedButton(
                             onPressed: () => _dialogBuilder(context),
-                            child: const Text('Set Daily Goal'),
-                          ),
-                        ],
-                      ),
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: const Color(0xff70BDF2),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                              ),
+                            ),
+                            child: const Text('Set Daily Goal')),
+                      ],
                     ),
                   ),
                 ),
@@ -110,9 +140,9 @@ class _HydratationPageState extends State<HydratationPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Current Water intake',
+                          'Your progression',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -126,33 +156,49 @@ class _HydratationPageState extends State<HydratationPage> {
                         ),
                         const SizedBox(height: 16),
                         Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () => _showAddWaterDialog(context),
-                            child: const Text('Add Water'),
-                          ),
-                          ElevatedButton(
-                            onPressed: () => _showAddOtherDialog(context),
-                            child: const Text('Add Other'),
-                          ),
-                                                    ElevatedButton(
-                            onPressed: () => _resetCurrentWater(),
-                            child: const Text('Start a new day'),
-                          ),
-                        ],
-                      ),
-                    ],
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () => _showAddWaterDialog(context),
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: const Color(0xff70BDF2),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                              ),
+                              child: const Text('Add Water'),
+                            ),
+                            //Coming soon
+                            // ElevatedButton(
+                            //   onPressed: () => _showAddOtherDialog(context),
+                            //   child: const Text('Add Other Drinks'),
+                            // ),
+                            ElevatedButton(
+                              onPressed: () => _resetCurrentWater(),
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: const Color(0xff70BDF2),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                              ),
+                              child: const Text('Reset'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   Future<void> _dialogBuilder(BuildContext context) async {
     final result = await showDialog<Map<String, dynamic>>(
@@ -169,54 +215,56 @@ class _HydratationPageState extends State<HydratationPage> {
     }
   }
 
-Future<void> _showAddWaterDialog(BuildContext context) async {
-  double? amount = currentWater;
-  
-  final result = await showDialog<Map<String, dynamic>>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Add Water'),
-        content: TextField(
-          keyboardType: TextInputType.numberWithOptions(decimal: true),
-          decoration: const InputDecoration(
-            hintText: 'Enter amount ',
-            labelText: 'Amount',
-          ),
-          onChanged: (value) {
-            amount = double.tryParse(value);
-          },
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
+  Future<void> _showAddWaterDialog(BuildContext context) async {
+    double? amount = currentWater;
+
+    await showDialog<Map<String, dynamic>>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add Water'),
+          content: TextField(
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            decoration: const InputDecoration(
+              hintText: 'Enter amount ',
+              labelText: 'Amount',
+            ),
+            onChanged: (value) {
+              amount = double.tryParse(value);
             },
-            child: const Text('Cancel'),
           ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                currentWater = currentWater! + amount!;
-              });
-              Navigator.pop(context);
-            },
-            child: const Text('Add'),
-          ),
-        ],
-      );
-    },
-  );
-}
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  currentWater = currentWater! + amount!;
+                  _saveCurrentWaterValue();
+                });
+                Navigator.pop(context);
+              },
+              child: const Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> _showAddOtherDialog(BuildContext context) async {
     double? amount = currentWater;
-    final result = await showDialog<Map<String, dynamic>>(
+    await showDialog<Map<String, dynamic>>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Add Other'),
           content: TextField(
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(
               hintText: 'Enter amount in ounces',
               labelText: 'Amount',
@@ -236,6 +284,7 @@ Future<void> _showAddWaterDialog(BuildContext context) async {
               onPressed: () {
                 setState(() {
                   currentWater = amount;
+                  _saveCurrentWaterValue();
                 });
                 Navigator.pop(context);
               },
@@ -247,5 +296,3 @@ Future<void> _showAddWaterDialog(BuildContext context) async {
     );
   }
 }
-
-
