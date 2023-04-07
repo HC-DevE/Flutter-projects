@@ -152,9 +152,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
             decoration: BoxDecoration(
               color: const Color(0xff70BDF2),
               borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: Image.asset('lib/assets/images/water_bg.jpg').image,
-              ),
+              // image: DecorationImage(
+              //   image: Image.asset('lib/assets/images/water_bg.jpg').image,
+              // ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
