@@ -1,9 +1,10 @@
 # watintake_hydrateX
-
+Application réalisée par Houcine ESSAYAD et Paul RINFRAY 
 
 
 Watintake est une aplication qui permet de définir un objectif quotidien d'hydratation, et de suivre son hydratation au cours de la journée en ajoutant les quantités consommées. 
-
+Il est aussi possible de parcourir un Api de nutrition afin de récupérer un alimenbt et d'obtenir ses calories si il est référencé dans la catégorie "Branded". 
+Nous souhaitions mettre en place un système de recherche d'aliment / boisson consommés afin de récupérer via l'api la quantité d'eau pure présente et d'incrémenter la variable currentWater. Cependant, cette donnée à été retirée de l'API pendant notre phase de développement. 
 
     Version de flutter : 
 
