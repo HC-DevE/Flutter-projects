@@ -49,7 +49,7 @@ class Common {
   String? foodName;
   String? servingUnit;
   String? tagName;
-  int? servingQty;
+  num? servingQty;
   dynamic commonType;
   String? tagId;
   Photo? photo;

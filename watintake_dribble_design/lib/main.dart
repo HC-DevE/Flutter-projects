@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:watintake_dribble_design/firebase_options.dart';
 import 'package:watintake_dribble_design/screens/home/homepage_screen.dart';
 import 'package:watintake_dribble_design/screens/home/welcome_screen.dart';
-import 'package:watintake_dribble_design/screens/nutrition/food_detail_screen.dart';
+import 'package:watintake_dribble_design/screens/nutrition/branded_food_detail_screen.dart';
+import 'package:watintake_dribble_design/screens/nutrition/common_food_detail_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => const HomePageScreen()),
-        GetPage(name: '/detail', page: () => FoodDetailScreen()),
+        GetPage(name: '/detailCommon', page: () => const CommonFoodDetailScreen()),
+        GetPage(name: '/detailBranded', page: () => const BrandedFoodDetailScreen()),
       ],
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watintake_dribble_design/widgets/daily_goal_form.dart';
 
 import '../../widgets/water_bottle.dart';
@@ -13,6 +14,22 @@ class HydratationPage extends StatefulWidget {
 class _HydratationPageState extends State<HydratationPage> {
   double? dailyGoal;
   double? currentWater = 0;
+
+void _loadDailyGoal() async {
+    final prefs = await SharedPreferences.getInstance();
+    final dailyGoal = prefs.getDouble('dailyGoal');
+    if (dailyGoal != null) {
+      setState(() {
+        this.dailyGoal = dailyGoal;
+      });
+    }
+}
+
+@override
+  void initState() {
+    super.initState();
+    // _loadDailyGoal();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +69,7 @@ class _HydratationPageState extends State<HydratationPage> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          '${currentWater?.toStringAsFixed(1) ?? '0.0'} oz',
+                          '${currentWater?.toStringAsFixed(1) ?? '0'} oz',
                           style: const TextStyle(
                               fontSize: 36, fontWeight: FontWeight.bold),
                         ),
@@ -173,3 +190,5 @@ class _HydratationPageState extends State<HydratationPage> {
     );
   }
 }
+
+
