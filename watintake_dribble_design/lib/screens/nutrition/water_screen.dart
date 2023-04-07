@@ -5,7 +5,7 @@ import 'package:watintake_dribble_design/widgets/daily_goal_form.dart';
 import '../../widgets/water_bottle.dart';
 
 class HydratationPage extends StatefulWidget {
-  const HydratationPage({super.key});
+  const HydratationPage({Key? key}) : super(key: key);
 
   @override
   State<HydratationPage> createState() => _HydratationPageState();
@@ -43,77 +43,89 @@ class _HydratationPageState extends State<HydratationPage> {
     // _loadunit();
   }
 
+  void _resetCurrentWater() {
+    setState(() {
+      currentWater = 0;
+    });
+  }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    body: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (dailyGoal != null)
-            Expanded(
-              child: WaterBottle(
-                  currentWater: currentWater!, dailyGoal: dailyGoal!),
-            ),
-          if (dailyGoal == null)
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue[100],
-                  borderRadius: BorderRadius.circular(16),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (dailyGoal != null)
+              Expanded(
+                child: WaterBottle(
+                  currentWater: currentWater!,
+                  dailyGoal: dailyGoal!,
+                  unit: unit!,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Set your daily goal for water intake',
-                          style: TextStyle(
-                            fontSize: 24, 
-                            fontWeight: FontWeight.bold
+              ),
+            if (dailyGoal == null)
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue[100],
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Set your daily goal for water intake',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: () => _dialogBuilder(context),
-                          child: const Text('Set Daily Goal'),
-                        ),
-                      ],
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () => _dialogBuilder(context),
+                            child: const Text('Set Daily Goal'),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          const SizedBox(height: 16),
-          if (dailyGoal != null)
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue[100],
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Current Water intake',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        '${currentWater?.toStringAsFixed(1) ?? '0'} $unit',
-                        style: const TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
+            const SizedBox(height: 16),
+            if (dailyGoal != null)
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blue[100],
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Current Water intake',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          '${currentWater?.toStringAsFixed(1) ?? '0'} $unit',
+                          style: const TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
@@ -123,6 +135,10 @@ Widget build(BuildContext context) {
                           ElevatedButton(
                             onPressed: () => _showAddOtherDialog(context),
                             child: const Text('Add Other'),
+                          ),
+                                                    ElevatedButton(
+                            onPressed: () => _resetCurrentWater(),
+                            child: const Text('Start a new day'),
                           ),
                         ],
                       ),
@@ -155,6 +171,7 @@ Widget build(BuildContext context) {
 
 Future<void> _showAddWaterDialog(BuildContext context) async {
   double? amount = currentWater;
+  
   final result = await showDialog<Map<String, dynamic>>(
     context: context,
     builder: (BuildContext context) {

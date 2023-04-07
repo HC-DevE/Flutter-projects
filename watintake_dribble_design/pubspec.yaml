@@ -43,6 +43,7 @@ dependencies:
   get: ^4.6.5
   google_nav_bar: ^5.0.6
   shared_preferences: ^2.1.0
+  flutter_local_notifications: ^8.2.0
 
 dev_dependencies:
   flutter_test:

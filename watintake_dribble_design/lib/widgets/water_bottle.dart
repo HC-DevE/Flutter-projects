@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class WaterBottle extends StatelessWidget {
   final double currentWater;
   final double dailyGoal;
+  final String unit;
 
-  const WaterBottle({required this.currentWater, required this.dailyGoal});
+  const WaterBottle({required this.currentWater, required this.dailyGoal, required this.unit});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,11 @@ class WaterBottle extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${currentWater.toStringAsFixed(0)} ml',
+                '${currentWater.toStringAsFixed(0)} $unit',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
-                '${dailyGoal.toStringAsFixed(0)} ml',
+                '${dailyGoal.toStringAsFixed(0)} $unit',
                 style: TextStyle(color: Colors.white),
               ),
             ],
