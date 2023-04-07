@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watintake_dribble_design/models/instant_search_api_data.dart';
 
-class FoodDetailScreen extends StatefulWidget {
-  const FoodDetailScreen({Key? key}) : super(key: key);
+class CommonFoodDetailScreen extends StatefulWidget {
+  const CommonFoodDetailScreen({Key? key}) : super(key: key);
 
   @override
-  State<FoodDetailScreen> createState() => _FoodDetailScreenState();
+  State<CommonFoodDetailScreen> createState() => _CommonFoodDetailScreenState();
 }
 
-class _FoodDetailScreenState extends State<FoodDetailScreen> {
-  Common commonFood = Get.arguments ;
-  // Branded brandedFood = Get.arguments;
+class _CommonFoodDetailScreenState extends State<CommonFoodDetailScreen> {
+  Common commonFood = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.black),
         title: Row(
           children: [
             ClipRRect(
@@ -29,32 +31,31 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
               ),
             ),
             const SizedBox(width: 10),
-            Text(commonFood.foodName.toString().toUpperCase()),
+            Text(commonFood.foodName.toString()),
           ],
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Nutritional Information',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
-            _buildNutritionInfo('Calories', 'nfCalories'),
-            _buildNutritionInfo(
-                'Serving Size',
-                "servingQty, servingUnit"),
+            const SizedBox(height: 10),
+            _buildNutritionInfo('TagId', commonFood.tagId),
+            _buildNutritionInfo('TagName', commonFood.tagName),
+            _buildNutritionInfo('Serving Size', "servingQty, servingUnit"),
             _buildNutritionInfo('Brand', 'brandName'),
-            _buildNutritionInfo("Region", 'region'),
-            SizedBox(height: 20),
-            Text(
+            _buildNutritionInfo("Region", commonFood.locale),
+            const SizedBox(height: 20),
+            const Text(
               'Ingredients',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'brandName ItemName',
               style: TextStyle(fontSize: 16),
             ),
@@ -72,11 +73,11 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
           Text(
             value.toString(),
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),

@@ -21,20 +21,19 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                child: SearchBar(),
-              ),
+              SearchBar(),
               // const SizedBox(height: 10),
               Expanded(
                 child: Obx(() {
-                  if (_foodController.isLoading.value) {
+                  if (_foodController.isLoading.value == true) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    if (_foodController.foods.value.common!.isNotEmpty &&
-                        _foodController.foods.value.branded!.isNotEmpty) {
+                    if (_foodController.foods.value.common != null &&
+                        _foodController.foods.value.branded != null) {
                       return Column(
                         children: [
-                          const Text('Common foods', textAlign: TextAlign.start),
+                          const Text('Common foods',
+                              textAlign: TextAlign.start),
                           Expanded(
                             child: ListView.builder(
                               itemCount:
@@ -61,17 +60,27 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
                                     leading: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Image.network(
-                                        commonfood.photo!.thumb.toString(),
-                                        width: 50,
-                                        height: 50,
-                                      ),
+                                          commonfood.photo!.thumb.toString(),
+                                          width: 50,
+                                          height: 50,
+                                          //loading animation
+                                          loadingBuilder: (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent?
+                                                  loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return CircularProgressIndicator(
+                                          color: Colors.red.shade300,
+                                        );
+                                      }),
                                     ),
                                     subtitle: Text(
                                         '${commonfood.servingUnit} ${commonfood.servingQty}'),
                                     onTap: () {
                                       // Navigate to detail screen
-                                      // Get.toNamed('/detail', arguments:{ 'foods': _foodController.foods.value, 'selectedIndex': index});
-                                      Get.toNamed('/detail',
+                                      Get.toNamed('/detailCommon',
                                           arguments: commonfood);
                                       // Navigator.pushNamed(context, '/detail');
                                     },
@@ -112,11 +121,21 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
                                       brandedfood.photo!.thumb.toString(),
                                       width: 50,
                                       height: 50,
+                                      //loading animation
+                                      loadingBuilder: (BuildContext context,
+                                          Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return CircularProgressIndicator(
+                                          color: Colors.green.shade300,
+                                        );
+                                      },
                                     ),
                                     onTap: () {
                                       // Navigate to detail screen
-                                      // Get.toNamed('/detail', arguments:{ 'foods': _foodController.foods.value, 'selectedIndex': index});
-                                      Get.toNamed('/detail',
+                                      Get.toNamed('/detailBranded',
                                           arguments: brandedfood);
                                       // Navigator.pushNamed(context, '/detail');
                                     },
@@ -127,14 +146,14 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
                           ),
                         ],
                       );
-                    } else {
-                      if (_foodController.foods.value.common!.isEmpty &&
-                          _foodController.foods.value.branded!.isEmpty) {
+                    } 
+                    else {
+                      if(_foodController.query != null){
                         return const Center(child: Text('No data found'));
-                      } else {
-                        return const Center(child: Text('No data found'));
+                      }else {
+
+                      return const Center(child: Text('Search something'));
                       }
-                      // return const Center(child: Text('No data found'));
                     }
                   }
                 }),

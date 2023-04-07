@@ -27,46 +27,45 @@ class AuthService {
   //   await GoogleSignIn().signOut();
   //   await FirebaseAuth.instance.signOut();
   // }
-}
 
-Future<UserCredential> signInToNutritionix(
-    signInPsswd, signInEmail, signInPhoneNumber) async {
-  final response = await http.post(
-    Uri.parse(NutritionixApiUrls.baseUrl + NutritionixApiUrlEndpoints.signIn),
-    body: {
-      "password": signInPsswd,
-      "email": signInEmail,
-      "phone_number": signInPhoneNumber
-    },
-  );
 
-  if (response.statusCode == 200) {
-    return json.decode(response.body)["user"] ;
-  } else {
-    return json.decode(response.body);
-  }
-}
+// Future<UserCredential> signInToNutritionix(
+//     signInPsswd, signInEmail, signInPhoneNumber) async {
+//   final response = await http.post(
+//     Uri.parse(NutritionixApiUrls.baseUrl + NutritionixApiUrlEndpoints.signIn),
+//     body: {
+//       "password": signInPsswd,
+//       "email": signInEmail,
+//       "phone_number": signInPhoneNumber
+//     },
+//   );
 
-Future<UserCredential> signUpToNutritionix(signUpPsswd, signUpEmail,
-    signUpFirstName, signUpTimeZone, signUpRef) async {
-  //use the nutritionix api with endpoint
-  //https://trackapi.nutritionix.com/v2/auth/signup
+//   if (response.statusCode == 200) {
+//     return json.decode(response.body)["user"] ;
+//   } else {
+//     return json.decode(response.body);
+//   }
+// }
 
-  var http;
-  final response = await http.post(
-    Uri.parse(NutritionixApiUrls.baseUrl + NutritionixApiUrlEndpoints.signUp),
-    body: {
-      "password": signUpPsswd,
-      "email": signUpEmail,
-      "first_name": signUpFirstName,
-      "timezone": signUpTimeZone,
-      "ref": signUpRef
-    },
-  );
+// Future<User> signUpToNutritionix(signUpPsswd, signUpEmail,
+//     signUpFirstName, signUpTimeZone, signUpRef) async {
+//   //use the nutritionix api with endpoint
+//   //https://trackapi.nutritionix.com/v2/auth/signup
+//   final response = await http.post(
+//     Uri.parse(NutritionixApiUrls.baseUrl + NutritionixApiUrlEndpoints.signUp),
+//     body: {
+//       "password": signUpPsswd,
+//       "email": signUpEmail,
+//       "first_name": signUpFirstName,
+//       "timezone": signUpTimeZone,
+//       "ref": signUpRef
+//     },
+//   );
 
-  if (response.statusCode == 200) {
-    return json.decode(response.body["x-user-jwt"]);
-  } else {
-    return json.decode(response);
-  }
+//   if (response.statusCode == 200) {
+//     return json.decode(response.body["x-user-jwt"]);
+//   } else {
+//     return json.decode(response);
+//   }
+// }
 }

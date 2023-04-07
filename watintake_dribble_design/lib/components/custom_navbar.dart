@@ -17,8 +17,8 @@ class CustomBottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         activeColor: Colors.white,
         color: Colors.blue,
-        // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        // duration: Duration(milliseconds: 400),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        duration: const Duration(milliseconds: 100),
         tabBackgroundColor: Colors.blue.shade200,
         tabActiveBorder: Border.all(color: Colors.blue),
         gap: 8,
@@ -32,7 +32,7 @@ class CustomBottomNavBar extends StatelessWidget {
             text: 'Hydratation',
           ),
           GButton(
-            icon: Icons.sports_gymnastics,
+            icon: Icons.fitness_center,
             text: 'Workout',
           ),
           GButton(
