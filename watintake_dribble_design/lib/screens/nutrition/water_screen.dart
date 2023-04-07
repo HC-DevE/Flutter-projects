@@ -16,6 +16,25 @@ class _HydratationPageState extends State<HydratationPage> {
   double? currentWater = 0;
   String? unit;
 
+  late SharedPreferences _prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPrefs();
+    _loadDailyGoal();
+    _loadUnit();
+    _loadCurrentWater();
+  }
+
+  Future<void> _initPrefs() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  void _saveCurrentWaterValue() {
+    _prefs.setDouble('currentWater', currentWater ?? 0.0);
+  }
+
   void _loadDailyGoal() async {
     final prefs = await SharedPreferences.getInstance();
     final dailyGoal = prefs.getDouble('dailyGoal');
@@ -26,7 +45,7 @@ class _HydratationPageState extends State<HydratationPage> {
     }
   }
 
-  void _loadunit() async {
+  void _loadUnit() async {
     final prefs = await SharedPreferences.getInstance();
     final unit = prefs.getString('unit');
     if (unit != null) {
@@ -36,16 +55,20 @@ class _HydratationPageState extends State<HydratationPage> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    // _loadDailyGoal();
-    // _loadunit();
+  void _loadCurrentWater() async {
+    final prefs = await SharedPreferences.getInstance();
+    final currentWater = prefs.getDouble('currentWater');
+    if (currentWater != null) {
+      setState(() {
+        this.currentWater = currentWater;
+      });
+    }
   }
 
   void _resetCurrentWater() {
     setState(() {
       currentWater = 0;
+      _saveCurrentWaterValue();
     });
   }
 
@@ -89,15 +112,15 @@ class _HydratationPageState extends State<HydratationPage> {
                         const SizedBox(height: 50),
                         ElevatedButton(
                             onPressed: () => _dialogBuilder(context),
-                            child: const Text('Set Daily Goal'),
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Color(0xff70BDF2),
+                              backgroundColor: const Color(0xff70BDF2),
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                               ),
-                            )),
+                            ),
+                            child: const Text('Set Daily Goal')),
                       ],
                     ),
                   ),
@@ -137,15 +160,32 @@ class _HydratationPageState extends State<HydratationPage> {
                           children: [
                             ElevatedButton(
                               onPressed: () => _showAddWaterDialog(context),
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: const Color(0xff70BDF2),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                              ),
                               child: const Text('Add Water'),
                             ),
-                            ElevatedButton(
-                              onPressed: () => _showAddOtherDialog(context),
-                              child: const Text('Add Other'),
-                            ),
+                            //Coming soon
+                            // ElevatedButton(
+                            //   onPressed: () => _showAddOtherDialog(context),
+                            //   child: const Text('Add Other Drinks'),
+                            // ),
                             ElevatedButton(
                               onPressed: () => _resetCurrentWater(),
-                              child: const Text('Start a new day'),
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor: const Color(0xff70BDF2),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                              ),
+                              child: const Text('Reset'),
                             ),
                           ],
                         ),
@@ -178,7 +218,7 @@ class _HydratationPageState extends State<HydratationPage> {
   Future<void> _showAddWaterDialog(BuildContext context) async {
     double? amount = currentWater;
 
-    final result = await showDialog<Map<String, dynamic>>(
+    await showDialog<Map<String, dynamic>>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -204,6 +244,7 @@ class _HydratationPageState extends State<HydratationPage> {
               onPressed: () {
                 setState(() {
                   currentWater = currentWater! + amount!;
+                  _saveCurrentWaterValue();
                 });
                 Navigator.pop(context);
               },
@@ -217,13 +258,13 @@ class _HydratationPageState extends State<HydratationPage> {
 
   Future<void> _showAddOtherDialog(BuildContext context) async {
     double? amount = currentWater;
-    final result = await showDialog<Map<String, dynamic>>(
+    await showDialog<Map<String, dynamic>>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Add Other'),
           content: TextField(
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(
               hintText: 'Enter amount in ounces',
               labelText: 'Amount',
@@ -243,6 +284,7 @@ class _HydratationPageState extends State<HydratationPage> {
               onPressed: () {
                 setState(() {
                   currentWater = amount;
+                  _saveCurrentWaterValue();
                 });
                 Navigator.pop(context);
               },
