@@ -50,51 +50,58 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
         // backgroundColor: Colors.blue[100],
         body: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        'Hi, ${user?.displayName}',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff70BDF2),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25.0, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'lib/assets/images/menu_icon.png',
+                        height: 30,
+                        color: Color(0xff70BDF2),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => ProfilePage());
+                        },
+                        child: CircleAvatar(
+                          radius: 25,
+                          backgroundColor: Colors.transparent,
+                          child: SizedBox(
+                            height: 45,
+                            width: 45,
+                            child: ClipOval(
+                              child: Image.network(
+                                user?.photoURL.toString() ?? 'You',
+                              ),
+                            ),
+                          ),
                         ),
+                        // child: Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Image.network(
+                        //     user?.photoURL.toString() ?? 'You',
+                        //     // height: 45,
+                        //     fit: BoxFit.contain,
+                        //   ),
+                        // ),
                       ),
-                    ),
+                    ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => ProfilePage());
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xff70BDF2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Icon(
-                        Icons.account_circle_sharp,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .7,
-                child: _pages[_selectedIndex],
-              ),
-            ],
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .7,
+                  child: _pages[_selectedIndex],
+                ),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: CustomBottomNavBar(

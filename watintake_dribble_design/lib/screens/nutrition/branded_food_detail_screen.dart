@@ -2,61 +2,128 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watintake_dribble_design/models/instant_search_api_data.dart';
 
-class BrandedFoodDetailScreen extends StatefulWidget {
-  const BrandedFoodDetailScreen({Key? key}) : super(key: key);
+import '../../constants/constants.dart';
+import '../../widgets/app_icon.dart';
 
-  @override
-  State<BrandedFoodDetailScreen> createState() => _BrandedFoodDetailScreenState();
-}
+class BrandedFoodDetailScreen extends StatelessWidget {
+  BrandedFoodDetailScreen({Key? key}) : super(key: key);
 
-class _BrandedFoodDetailScreenState extends State<BrandedFoodDetailScreen> {
   Branded brandedFood = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(color: Colors.black),
-        title: Row(
+      body: SafeArea(
+        child: Stack(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                brandedFood.photo!.thumb!,
-                height: 30,
-                width: 30,
-                fit: BoxFit.contain,
+            //background image
+            Positioned(
+              left: 0,
+              right: 0,
+              child: Container(
+                height: Dimensions.popularFoodImgSize350,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: Image.network(
+                      brandedFood.photo!.thumb!,
+                    ).image,
+                  ),
+                ),
               ),
             ),
-            const SizedBox(width: 10),
-            Text(brandedFood.foodName.toString().toUpperCase()),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            const Text(
-              'Nutritional Information',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
+            // icon widget
+            Positioned(
+              top: Dimensions.height20,
+              left: Dimensions.width10,
+              right: Dimensions.width10,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: AppIcon(
+                      icon: Icons.arrow_back_ios,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 10),
-            _buildNutritionInfo('Calories', brandedFood.nfCalories),
-            _buildNutritionInfo('Serving Size', "${brandedFood.servingQty}, ${brandedFood.servingUnit}"),
-            _buildNutritionInfo('Brand', brandedFood.brandName),
-            _buildNutritionInfo("Region", brandedFood.region),
-            const SizedBox(height: 20),
-            const Text(
-              'Ingredients',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'brandName ItemName',
-              style: TextStyle(fontSize: 16),
+            //introduction of food
+            Positioned(
+              left: 0,
+              right: 0,
+              top: Dimensions.popularFoodImgSize350 - 20,
+              child: Container(
+                padding: EdgeInsets.only(
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                    top: Dimensions.height20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(Dimensions.radius20),
+                    topLeft: Radius.circular(Dimensions.radius20),
+                  ),
+                  color: Colors.green[200],
+                ),
+                child: SizedBox(
+                  height: Dimensions.screenHeight -
+                      Dimensions.popularFoodImgSize350,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Nutritional Information',
+                        style: TextStyle(
+                            fontSize: Dimensions.font20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54),
+                      ),
+                      SizedBox(
+                        height: Dimensions.height20,
+                      ),
+                      Container(
+                        height: Dimensions.screenHeight * 0.3,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(
+                            Dimensions.radius20,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              brandedFood.foodName.toString(),
+                              style: TextStyle(
+                                  fontSize: Dimensions.font16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green[300]),
+                            ),
+                            _buildNutritionInfo(
+                                'Serving Quantity :', brandedFood.servingQty),
+                            _buildNutritionInfo(
+                                'Serving Unit :', brandedFood.servingUnit),
+                            _buildNutritionInfo(
+                                'Calories :', brandedFood.nfCalories),
+                            _buildNutritionInfo(
+                                'Brand :', brandedFood.brandName),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: Dimensions.height20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -76,7 +143,10 @@ class _BrandedFoodDetailScreenState extends State<BrandedFoodDetailScreen> {
           ),
           Text(
             value.toString(),
-            style: const TextStyle(fontSize: 16),
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color(0xfff6cadd),
+            ),
           ),
         ],
       ),
