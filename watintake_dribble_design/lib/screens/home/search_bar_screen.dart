@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:watintake_dribble_design/components/search_bar.dart';
 import 'package:watintake_dribble_design/controllers/food_controller.dart';
 
 class SearchBarScreen extends StatefulWidget {

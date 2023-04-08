@@ -63,7 +63,7 @@ class _LandingPageState extends State<LandingPage> {
                       Image.asset(
                         'lib/assets/images/menu_icon.png',
                         height: 30,
-                        color: Color(0xff70BDF2),
+                        color: const Color(0xff70BDF2),
                       ),
                       GestureDetector(
                         onTap: () {

@@ -27,14 +27,14 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => const HomePageScreen()),
-        GetPage(name: '/detailCommon', page: () => CommonFoodDetailScreen()),
+        GetPage(name: '/detailCommon', page: () => const CommonFoodDetailScreen()),
         GetPage(name: '/detailBranded', page: () => BrandedFoodDetailScreen()),
       ],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home: const WelcomePage(),
     );
   }
 }

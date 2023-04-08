@@ -48,7 +48,7 @@ class BrandedFoodDetailScreen extends StatelessWidget {
                     onTap: () {
                       Get.back();
                     },
-                    child: AppIcon(
+                    child: const AppIcon(
                       icon: Icons.arrow_back_ios,
                     ),
                   ),

@@ -15,8 +15,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
   double? dailyGoal = 0;
   double? currentWater = 0;
 
-  late SharedPreferences _prefs;
-
   @override
   void initState() {
     super.initState();
@@ -26,7 +24,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   Future<void> _initPrefs() async {
-    _prefs = await SharedPreferences.getInstance();
   }
 
   void _loadDailyGoal() async {
@@ -129,7 +126,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     padding: const EdgeInsets.all(10),
                     margin: const EdgeInsets.only(right: 5),
                     decoration: BoxDecoration(
-                      color: Color(0xfff6cadd),
+                      color: const Color(0xfff6cadd),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Icon(

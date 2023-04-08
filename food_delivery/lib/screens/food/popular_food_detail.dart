@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -7,11 +5,6 @@ import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/big_text.dart';
 import 'package:food_delivery/widgets/expandable_text_widget.dart';
-import 'package:food_delivery/widgets/small_text.dart';
-
-import '../../nutritionix_api.service.dart';
-import '../../widgets/icon_text_widget.dart';
-
 class PopularFoodDetail extends StatelessWidget {
   const PopularFoodDetail({super.key});
 
@@ -28,7 +21,7 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               height: Dimensions.popularFoodImgSize350,
               width: double.maxFinite,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage('lib/assets/images/pancakes.jpg'),
@@ -44,7 +37,7 @@ class PopularFoodDetail extends StatelessWidget {
             right: Dimensions.width20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 AppIcon(
                   icon: Icons.arrow_back_ios,
                 ),
@@ -72,13 +65,13 @@ class PopularFoodDetail extends StatelessWidget {
                 ),
                 color: Colors.white,
               ),
-              child: Container(
+              child: SizedBox(
                 height:
                     Dimensions.screenHeight - Dimensions.popularFoodImgSize350,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppColumn(
+                    const AppColumn(
                       text: 'Pancake With Honey',
                     ),
                     SizedBox(
@@ -89,7 +82,7 @@ class PopularFoodDetail extends StatelessWidget {
                       height: Dimensions.height10,
                     ),
                     // expandable text widget
-                    Expanded(
+                    const Expanded(
                       child: SingleChildScrollView(
                         child: ExpandableTextWidget(
                             text:
@@ -128,15 +121,15 @@ class PopularFoodDetail extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.remove, color: AppColors.signColor),
-                      SizedBox(
+                      const Icon(Icons.remove, color: AppColors.signColor),
+                      const SizedBox(
                         width: 5,
                       ),
                       BigText(text: '0'),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
-                      Icon(Icons.add, color: AppColors.signColor),
+                      const Icon(Icons.add, color: AppColors.signColor),
                     ],
                   )),
               //addtocart button

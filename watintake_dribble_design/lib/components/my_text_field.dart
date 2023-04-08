@@ -39,7 +39,7 @@ class _MyTextFieldState extends State<MyTextField> {
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xff70BDF2)),
+            borderSide: const BorderSide(color: Color(0xff70BDF2)),
             borderRadius: BorderRadius.circular(12),
           ),
           fillColor: Colors.white,

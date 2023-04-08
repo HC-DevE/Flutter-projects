@@ -204,7 +204,7 @@ class _HydratationPageState extends State<HydratationPage> {
     final result = await showDialog<Map<String, dynamic>>(
       context: context,
       builder: (BuildContext context) {
-        return DailyGoalForm();
+        return const DailyGoalForm();
       },
     );
     if (result != null) {
@@ -224,7 +224,7 @@ class _HydratationPageState extends State<HydratationPage> {
         return AlertDialog(
           title: const Text('Add Water'),
           content: TextField(
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(
               hintText: 'Enter amount ',
               labelText: 'Amount',

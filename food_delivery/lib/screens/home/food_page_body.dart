@@ -45,7 +45,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     var pageLength = 5;
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: Dimensions.pageView,
           child: PageView.builder(
               controller: _controller,
@@ -113,7 +113,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
         ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: 10,
           itemBuilder: ((context, index) {
@@ -234,7 +234,7 @@ Widget _buildPageItem(int index) {
           child: Container(
             padding: EdgeInsets.symmetric(
                 horizontal: Dimensions.height15, vertical: Dimensions.height15),
-            child: AppColumn(text: 'Pancake With Honey'),
+            child: const AppColumn(text: 'Pancake With Honey'),
           ),
         ),
       ),
