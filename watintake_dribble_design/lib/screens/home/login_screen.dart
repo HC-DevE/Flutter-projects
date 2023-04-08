@@ -189,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(width: 10),
                     SquareButton(
-                      imagePath: 'lib/assets/images/welcome_screen.png',
+                      imagePath: 'lib/assets/images/apple_logo.png',
                       onTap: () {},
                     ),
                   ],
