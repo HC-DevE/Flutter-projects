@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watintake_dribble_design/controllers/food_controller.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+class SearchBarWidget extends StatefulWidget {
+  const SearchBarWidget({super.key});
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarWidgetState extends State<SearchBarWidget> {
   final _searchInputController = TextEditingController();
   final FoodController _foodController = Get.put(FoodController());
 

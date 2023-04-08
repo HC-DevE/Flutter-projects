@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watintake_dribble_design/controllers/food_controller.dart';
 
+import '../../components/search_bar.dart';
+
 class SearchBarScreen extends StatefulWidget {
   const SearchBarScreen({super.key});
 
@@ -20,7 +22,7 @@ class _SearchBarScreenState extends State<SearchBarScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SearchBar(),
+              SearchBarWidget(),
               // const SizedBox(height: 10),
               Expanded(
                 child: Obx(() {
