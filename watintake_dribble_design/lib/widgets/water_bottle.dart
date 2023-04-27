@@ -5,7 +5,7 @@ class WaterBottle extends StatelessWidget {
   final double dailyGoal;
   final String unit;
 
-  const WaterBottle({required this.currentWater, required this.dailyGoal, required this.unit});
+  const WaterBottle({super.key, required this.currentWater, required this.dailyGoal, required this.unit});
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +19,27 @@ class WaterBottle extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Current Water Intake',
             style: TextStyle(color: Colors.white),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           LinearProgressIndicator(
             value: percentage,
             backgroundColor: Colors.white,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
+            valueColor: const AlwaysStoppedAnimation<Color>(Colors.lightBlueAccent),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 '${currentWater.toStringAsFixed(0)} $unit',
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               Text(
                 '${dailyGoal.toStringAsFixed(0)} $unit',
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ],
           ),

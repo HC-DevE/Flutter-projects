@@ -20,19 +20,8 @@ Future<http.Response> fetchNutritionData(String query) async {
     dataFromJson = jsonDecode(response.body);
   } else {
     // Handle error response
-    print(response.statusCode);
     dataFromJson = jsonDecode(response.statusCode.toString());
   }
   return dataFromJson;
 }
 
-class ReponseDataType {
-            final String food_name = "apple";
-            late final  serving_unit;
-             late final  tag_name;
-             late final  serving_qty;
-             late final  common_type;
-             late final  tag_id;
-             late final  Map<dynamic, String> photo;
-             late final locale;
-        }

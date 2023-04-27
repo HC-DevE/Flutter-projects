@@ -52,7 +52,7 @@ class _CommonFoodDetailScreenState extends State<CommonFoodDetailScreen> {
                     onTap: () {
                       Get.back();
                     },
-                    child: AppIcon(
+                    child: const AppIcon(
                       icon: Icons.arrow_back_ios,
                     ),
                   ),

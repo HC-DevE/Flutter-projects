@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
-  void Function(int index) onTabChange;
-  CustomBottomNavBar({super.key, required this.onTabChange});
+  final void Function(int index) onTabChange;
+  const CustomBottomNavBar({super.key, required this.onTabChange});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class CustomBottomNavBar extends StatelessWidget {
         // hoverColor: Colors.blue.shade800,
         mainAxisAlignment: MainAxisAlignment.center,
         activeColor: Colors.white,
-        color: Color(0xff70BDF2),
+        color: const Color(0xff70BDF2),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         duration: const Duration(milliseconds: 100),
         tabBackgroundColor: Colors.blue.shade200,

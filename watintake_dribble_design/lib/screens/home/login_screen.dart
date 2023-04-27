@@ -6,7 +6,6 @@ import 'package:watintake_dribble_design/components/square_box_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:watintake_dribble_design/screens/home/reset_password_screen.dart';
 import 'package:watintake_dribble_design/services/auth_service.dart';
-import 'package:watintake_dribble_design/services/nutritionix_api_service.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function()? onTap;
@@ -40,10 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
       //show snackbar
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.green,
-          content: const Text('Login Successful'),
-          duration: const Duration(seconds: 1),
+          content: Text('Login Successful'),
+          duration: Duration(seconds: 1),
         ),
       );
     } on FirebaseAuthException catch (e) {
@@ -126,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return ResetPasswordScreen();
+                                return const ResetPasswordScreen();
                               },
                             ),
                           );
@@ -190,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(width: 10),
                     SquareButton(
-                      imagePath: 'lib/assets/images/welcome_screen.png',
+                      imagePath: 'lib/assets/images/apple_logo.png',
                       onTap: () {},
                     ),
                   ],
@@ -202,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Not a member ?',
                       style: TextStyle(
                         fontSize: 14,
@@ -210,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: widget.onTap,
-                      child: Text(
+                      child: const Text(
                         '  Register Now ',
                         style: TextStyle(color: Colors.blue, fontSize: 14),
                       ),

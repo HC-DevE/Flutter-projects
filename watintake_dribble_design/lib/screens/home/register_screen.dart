@@ -15,8 +15,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  // final firstnameController = TextEditingController();
-  // final lastnameController = TextEditingController();
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -35,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     try {
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: usernameController.text,
+          email: emailController.text,
           password: passwordController.text,
         );
 

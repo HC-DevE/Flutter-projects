@@ -1,8 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../constants/constants.dart';
 
@@ -17,7 +15,7 @@ class WorkoutScreen extends StatelessWidget {
         child: Stack(children: <Widget>[
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
+            child: const SizedBox(
               height: 60,
               width: 60,
             ),
@@ -30,8 +28,8 @@ class WorkoutScreen extends StatelessWidget {
                 color: Color(0xffc9b6d7),
                 borderRadius: BorderRadius.all(Radius.circular(40)),
               ),
-              child: Center(
-                child: const Text(
+              child: const Center(
+                child: Text(
                   'Coming Soon...',
                   style: TextStyle(
                     fontSize: 20,

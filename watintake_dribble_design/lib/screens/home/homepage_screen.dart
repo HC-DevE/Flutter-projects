@@ -15,8 +15,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
   double? dailyGoal = 0;
   double? currentWater = 0;
 
-  late SharedPreferences _prefs;
-
   @override
   void initState() {
     super.initState();
@@ -25,9 +23,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     _loadDailyGoal();
   }
 
-  Future<void> _initPrefs() async {
-    _prefs = await SharedPreferences.getInstance();
-  }
+  Future<void> _initPrefs() async {}
 
   void _loadDailyGoal() async {
     final prefs = await SharedPreferences.getInstance();
@@ -59,10 +55,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Hello again!',
                     style: TextStyle(
@@ -102,6 +98,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
             decoration: BoxDecoration(
               color: const Color(0xffc9b6d7),
               borderRadius: BorderRadius.circular(10),
+              image: const DecorationImage(
+                image: AssetImage('lib/assets/images/food-bg.jpg'),
+                fit: BoxFit.cover,
+                opacity: 0.5,
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -129,7 +130,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     padding: const EdgeInsets.all(10),
                     margin: const EdgeInsets.only(right: 5),
                     decoration: BoxDecoration(
-                      color: Color(0xfff6cadd),
+                      color: const Color(0xfff6cadd),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Icon(
@@ -147,7 +148,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
           child: Container(
             height: 150,
             width: 250,
-            margin: const EdgeInsets.only(top: 20, right: 120),
+            margin: const EdgeInsets.only(top: 20, right: 100),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: const Color(0xff70BDF2),
@@ -192,7 +193,59 @@ class _HomePageScreenState extends State<HomePageScreen> {
               ],
             ),
           ),
-        )
+        ),
+        Center(
+          child: Container(
+            height: 150,
+            width: 250,
+            margin: const EdgeInsets.only(top: 20, left: 100),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xff70BDF2),
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: Image.asset('lib/assets/images/water_bg.jpg').image,
+                fit: BoxFit.cover,
+                opacity: 0.54,
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    const Text(
+                      'Your daily goal',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      dailyGoal.toString(),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Calories',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     ));
   }
